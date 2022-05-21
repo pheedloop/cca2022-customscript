@@ -99,7 +99,8 @@ function fixAccountPageReload() {
 
 function fixLangSwitcher() {
 	// Roch Lambert - Add lang attributes to the language switcher:
-	$("#languages-modal").find("a:contains('Français')").html('<span lang="en">French</span> (<span lang="fr">Français</span>)');
+	//$("#languages-modal").find("a:contains('Français')").html('<span lang="en">French</span> (<span lang="fr">Français</span>)');
+	$("a:contains('Français')").html('<span lang="en">French</span> (<span lang="fr">Français</span>)');
 } // End of fixLangSwitcher
 
 function fixHomeBannerAlt() {
