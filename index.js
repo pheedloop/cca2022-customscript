@@ -554,7 +554,7 @@ function fixLobbyHeadings() {
 	// First let's remove the date because they are not bilingual
 	$('#announcements').find('h6.card-subtitle').remove();
 	// Now Fix the french heading to an <h2> element, English is done via the Pheedloop system
-	$('#announcements').('h5.card-title').each(function () {
+	$('#announcements').find('h5.card-title').each(function () {
 		$(this).replaceWith('<h2 class="card-title font-sz-xl font-weight-bold">' + $(this).html() + '</h2>');
 	});
 	// Now add a hidden <h1> for semantic purposes
@@ -562,5 +562,5 @@ function fixLobbyHeadings() {
 		$('#announcements').prepend('<h1 class="wb-inv">Annonces</h1>');
 	} else {
 		$('#announcements').prepend('<h1 class="wb-inv">Announcements</h1>');
-	}
+	};
 } // End of fixToggleButton
