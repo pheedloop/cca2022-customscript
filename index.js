@@ -27,8 +27,6 @@ $('#page').bind('DOMSubtreeModified', function(e) {
 	$(document).ready(function() {
 		// Set timeout and ensure page is ready for a11y fixes
 		setTimeout(function() {
-			fixAllPages ();
-			
 			// If on the lobby page:
 			if (window.location.href.match(/\/CCA2022\/virtual\/\?page=lobby/i)) fixLobbyPage();
 			// If on the channels page:
@@ -55,6 +53,7 @@ function fixAllPages () {
 	fixPheedloopAdAlt();
 	fixNotifications();
 	fixLiveCount();
+	fixHelpDialog();
 } // End of fixAllPages
 
 function fixLoginPage() {
@@ -525,3 +524,10 @@ function fixSessionsFrenchTranslations () {
 		});
 	};
 } // End of fixSessionsFrenchTranslations
+
+function fixHelpDialog() {
+	// Fix the heading level on the dialog window
+	$('#instructions-modal').find("h5.modal-title").replaceWith("<h2 class='h5' id='instructions-modal-heading'>" + $('#instructions-modal').find("h5.modal-title").html() + "</h2>");
+	// Set the correct title
+	$('#instructions-modal').attr("aria-labelledby","instructions-modal-heading");
+} // End of fixHelpDialog
