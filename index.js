@@ -70,6 +70,7 @@ function fixChannelsPage() {
 
 function fixSessionsPage() {
 	fixChatWhiteSpaceChannelsSessions();
+	fixSessionsFrenchTranslations();
 } // End of fixSessionsPage
 
 function fixCareerFairPage() {
@@ -218,3 +219,287 @@ function fixAccountForm () {
 		pn.replaceWith('<fieldset class="form-group" aria-labelledby="legend' + index + ' small' + index + '">' + pn.html() + '</fieldset>');    
 	});
 } // End of fixAccountForm
+
+function fixSessionsFrenchTranslations () {
+	if(getCookie("language")==="fr"){
+		// Grab the date and change to french format on the left hand side
+		$('.session-selector').find('h6.mt-2').each(function(i,elem){
+			let html = $(elem).html().replace(/May 26/g,'26 mai');
+			$(this).html(html);
+		});
+		$('.session-selector').find('h6.mt-2').each(function(i,elem){
+			let html = $(elem).html().replace(/May 27/g,'27 mai');
+			$(this).html(html);
+		});
+		$('.session-selector').find('h6.mt-2').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/9:30/g,'9 h 30');
+			$(this).html(html);
+		});
+		$('.session-selector').find('h6.mt-2').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/10:00 AM/g,'10 h');
+			$(this).html(html);
+		});
+		$('.session-selector').find('h6.mt-2').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/10:00/g,'10 h');
+			$(this).html(html);
+		});
+		$('.session-selector').find('h6.mt-2').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/10:15 AM/g,'10 h 15');
+			$(this).html(html);
+		});
+		$('.session-selector').find('h6.mt-2').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/10:15/g,'10 h 15');
+			$(this).html(html);
+		});
+		$('.session-selector').find('h6.mt-2').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/10:45 AM/g,'10 h 45');
+			$(this).html(html);
+		});
+		$('.session-selector').find('h6.mt-2').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/10:45/g,'10 h 45');
+			$(this).html(html);
+		});
+		$('.session-selector').find('h6.mt-2').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/11:45 AM/g,'11 h 45');
+			$(this).html(html);
+		});
+		$('.session-selector').find('h6.mt-2').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/11:45/g,'11 h 45');
+			$(this).html(html);
+		});
+		$('.session-selector').find('h6.mt-2').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/12:00 PM/g,'12 h 00');
+			$(this).html(html);
+		});
+		$('.session-selector').find('h6.mt-2').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/12:00/g,'12 h 00');
+			$(this).html(html);
+		});
+		$('.session-selector').find('h6.mt-2').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/12:45 PM/g,'12 h 45');
+			$(this).html(html);
+		});
+		$('.session-selector').find('h6.mt-2').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/1:00 PM/g,'13 h');
+			$(this).html(html);
+		});
+		$('.session-selector').find('h6.mt-2').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/1:00/g,'13 h');
+			$(this).html(html);
+		});
+		$('.session-selector').find('h6.mt-2').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/2:00 PM/g,'14 h');
+			$(this).html(html);
+		});
+		$('.session-selector').find('h6.mt-2').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/2:00/g,'14 h');
+			$(this).html(html);
+		});
+		$('.session-selector').find('h6.mt-2').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/2:15 PM/g,'14 h 15');
+			$(this).html(html);
+		});
+		$('.session-selector').find('h6.mt-2').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/2:15/g,'14 h 15');
+			$(this).html(html);
+		});
+		$('.session-selector').find('h6.mt-2').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/3:00 PM/g,'15 h 00');
+			$(this).html(html);
+		});
+		$('.session-selector').find('h6.mt-2').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/3:00/g,'15 h 00');
+			$(this).html(html);
+		});
+		$('.session-selector').find('h6.mt-2').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/3:15 PM/g,'15 h 15');
+			$(this).html(html);
+		});
+		$('.session-selector').find('h6.mt-2').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/3:15/g,'15 h 15');
+			$(this).html(html);
+		});
+		$('.session-selector').find('h6.mt-2').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/3:30 PM/g,'15 h 30');
+			$(this).html(html);
+		});
+		$('.session-selector').find('h6.mt-2').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/3:30/g,'15 h 30');
+			$(this).html(html);
+		});
+		$('.session-selector').find('h6.mt-2').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/4:15 PM/g,'16 h 15');
+			$(this).html(html);
+		});
+		$('.session-selector').find('h6.mt-2').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/4:15/g,'16 h 15');
+			$(this).html(html);
+		});
+		$('.session-selector').find('h6.mt-2').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/4:25/g,'16 h 25');
+			$(this).html(html);
+		});
+		$('.session-selector').find('h6.mt-2').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/4:30 PM/g,'16 h 30');
+			$(this).html(html);
+		});
+		$('.session-selector').find('h6.mt-2').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/4:30/g,'16 h 30');
+			$(this).html(html);
+		});
+		$('.session-selector').find('h6.mt-2').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/4:35 PM/g,'16 h 35');
+			$(this).html(html);
+		});
+		$('.session-selector').find('h6.mt-2').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/4:35/g,'16 h 35');
+			$(this).html(html);
+		});
+		$('.session-selector').find('h6.mt-2').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/6:00 PM/g,'18 h');
+			$(this).html(html);
+		});
+		
+		// Grab the date and change to french format on the right hand side
+		$('#session-container').find('.mb-3.virtual-subtitle').each(function(i,elem){
+			let html = $(elem).html().replace(/Thursday May 26th/g,'Jeudi 26 mai');
+			$(this).html(html);
+		});
+		$('#session-container').find('.mb-3.virtual-subtitle').each(function(i,elem){
+			let html = $(elem).html().replace(/Friday May 27th/g,'Vendredi 27 mai');
+			$(this).html(html);
+		});
+		$('#session-container').find('.mb-3.virtual-subtitle').each(function(i,elem){
+			let html = $(elem).html().replace(/EDT/g,'HNE');
+			$(this).html(html);
+		});
+		$('#session-container').find('.mb-3.virtual-subtitle').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/9:30/g,'9 h 30');
+			$(this).html(html);
+		});
+		$('#session-container').find('.mb-3.virtual-subtitle').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/10:00 AM/g,'10 h');
+			$(this).html(html);
+		});
+		$('#session-container').find('.mb-3.virtual-subtitle').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/10:00/g,'10 h');
+			$(this).html(html);
+		});
+		$('#session-container').find('.mb-3.virtual-subtitle').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/10:15 AM/g,'10 h 15');
+			$(this).html(html);
+		});
+		$('#session-container').find('.mb-3.virtual-subtitle').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/10:15/g,'10 h 15');
+			$(this).html(html);
+		});
+		$('#session-container').find('.mb-3.virtual-subtitle').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/10:45 AM/g,'10 h 45');
+			$(this).html(html);
+		});
+		$('#session-container').find('.mb-3.virtual-subtitle').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/10:45/g,'10 h 45');
+			$(this).html(html);
+		});
+		$('#session-container').find('.mb-3.virtual-subtitle').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/11:45 AM/g,'11 h 45');
+			$(this).html(html);
+		});
+		$('#session-container').find('.mb-3.virtual-subtitle').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/11:45/g,'11 h 45');
+			$(this).html(html);
+		});
+		$('#session-container').find('.mb-3.virtual-subtitle').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/12:00 PM/g,'12 h 00');
+			$(this).html(html);
+		});
+		$('#session-container').find('.mb-3.virtual-subtitle').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/12:00/g,'12 h 00');
+			$(this).html(html);
+		});
+		$('#session-container').find('.mb-3.virtual-subtitle').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/12:45 PM/g,'12 h 45');
+			$(this).html(html);
+		});
+		$('#session-container').find('.mb-3.virtual-subtitle').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/1:00 PM/g,'13 h');
+			$(this).html(html);
+		});
+		$('#session-container').find('.mb-3.virtual-subtitle').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/1:00/g,'13 h');
+			$(this).html(html);
+		});
+		$('#session-container').find('.mb-3.virtual-subtitle').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/2:00 PM/g,'14 h');
+			$(this).html(html);
+		});
+		$('#session-container').find('.mb-3.virtual-subtitle').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/2:00/g,'14 h');
+			$(this).html(html);
+		});
+		$('#session-container').find('.mb-3.virtual-subtitle').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/2:15 PM/g,'14 h 15');
+			$(this).html(html);
+		});
+		$('#session-container').find('.mb-3.virtual-subtitle').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/2:15/g,'14 h 15');
+			$(this).html(html);
+		});
+		$('#session-container').find('.mb-3.virtual-subtitle').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/3:00 PM/g,'15 h 00');
+			$(this).html(html);
+		});
+		$('#session-container').find('.mb-3.virtual-subtitle').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/3:00/g,'15 h 00');
+			$(this).html(html);
+		});
+		$('#session-container').find('.mb-3.virtual-subtitle').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/3:15 PM/g,'15 h 15');
+			$(this).html(html);
+		});
+		$('#session-container').find('.mb-3.virtual-subtitle').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/3:15/g,'15 h 15');
+			$(this).html(html);
+		});
+		$('#session-container').find('.mb-3.virtual-subtitle').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/3:30 PM/g,'15 h 30');
+			$(this).html(html);
+		});
+		$('#session-container').find('.mb-3.virtual-subtitle').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/3:30/g,'15 h 30');
+			$(this).html(html);
+		});
+		$('#session-container').find('.mb-3.virtual-subtitle').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/4:15 PM/g,'16 h 15');
+			$(this).html(html);
+		});
+		$('#session-container').find('.mb-3.virtual-subtitle').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/4:15/g,'16 h 15');
+			$(this).html(html);
+		});
+		$('#session-container').find('.mb-3.virtual-subtitle').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/4:25/g,'16 h 25');
+			$(this).html(html);
+		});
+		$('#session-container').find('.mb-3.virtual-subtitle').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/4:30 PM/g,'16 h 30');
+			$(this).html(html);
+		});
+		$('#session-container').find('.mb-3.virtual-subtitle').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/4:30/g,'16 h 30');
+			$(this).html(html);
+		});
+		$('#session-container').find('.mb-3.virtual-subtitle').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/4:35 PM/g,'16 h 35');
+			$(this).html(html);
+		});
+		$('#session-container').find('.mb-3.virtual-subtitle').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/4:35/g,'16 h 35');
+			$(this).html(html);
+		});
+		$('#session-container').find('.mb-3.virtual-subtitle').find('.tz-date-adjust').each(function(i,elem){
+			let html = $(elem).html().replace(/6:00 PM/g,'18 h');
+			$(this).html(html);
+		});
+	};
+} // End of fixSessionsFrenchTranslations
