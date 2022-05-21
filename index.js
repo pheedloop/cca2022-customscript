@@ -30,19 +30,15 @@ function fixLangSwitcher() {
 function fixHomeBannerAlt() {
 	// Roch Lambert - Fix the homepage alternative text
 	if(getCookie("language")==="fr"){
-		jQuery(document).ready(function() {
-			setTimeout(function() {
-				// Update the alternative text on the homepage
-				$("#banner").find("img").attr("alt", "Une bannière avec 2 logos, le Congrès canadien sur l'inclusion des personnes en situation de handicap, 26-27 mai 2022. Une image des points connectés qui représente les partenariats et la collaboration au sein du gouvernement du Canada.");
-			}, 1000);
-		});
+		setTimeout(function() {
+			// Update the alternative text on the homepage
+			$("#banner").find("img").attr("alt", "Une bannière avec 2 logos, le Congrès canadien sur l'inclusion des personnes en situation de handicap, 26-27 mai 2022. Une image des points connectés qui représente les partenariats et la collaboration au sein du gouvernement du Canada.");
+		}, 5000);
 	} else {
-		jQuery(document).ready(function() {
-			setTimeout(function() {
-				// Update the alternative text on the homepage
-				$("#banner").find("img").attr("alt", "A banner with 2 logos, the Canadian Congress on Disability Inclusion, May 26-27 2022. An image of connected dots that signifies partnerships and collaboration within the Government of Canada.");
-			}, 1000);
-		});
+		setTimeout(function() {
+			// Update the alternative text on the homepage
+			$("#banner").find("img").attr("alt", "A banner with 2 logos, the Canadian Congress on Disability Inclusion, May 26-27 2022. An image of connected dots that signifies partnerships and collaboration within the Government of Canada.");
+		}, 5000);
 	}
 } // End of fixHomeBannerAlt
 
