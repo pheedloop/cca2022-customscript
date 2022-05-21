@@ -1,11 +1,17 @@
 $(document).ready(function() {
-	console.log("Hello there, world");
-	fixAllPages ();
+	// Set timeout and ensure page is ready for a11y fixes
+	setTimeout(function() {
+		fixAllPages ();
 
-	// If on the login page:
-	if (document.location.pathname == "/CCA2022/login/auth/") fixLoginPage();
-	// If on the lobby page:
-	if (window.location.href.match(/\/CCA2022\/virtual\/\?page=lobby/i)) fixLobbyPage();
+		// If on the login page:
+		if (document.location.pathname == "/CCA2022/login/auth/") fixLoginPage();
+		// If on the lobby page:
+		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=lobby/i)) fixLobbyPage();
+		// If on the account page:
+		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=settings/i)) fixAccountPage();
+		// If on the sessions page:
+		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=sessions/i)) fixSessionsPage();
+	}, 2500);
 });
 
 // fixAllPages fixes everything that appears across the Virtual Platform
@@ -25,6 +31,12 @@ function fixLobbyPage() {
 	fixHomeBannerAlt();	
 } // End of fixLobbyPage
 
+function fixAccountPage() {
+} // End of fixAccountPage
+
+function fixSessionsPage() {
+} // End of fixSessionsPage
+
 function fixLangSwitcher() {
 	// Andrew Nordlund - Add lang attributes to the language switcher:
 	$('#languages-modal a.list-group-item.list-group-item-action:contains("Français")').html('<span lang="en">French</span> (<span lang="fr">Français</span>)');
@@ -33,15 +45,11 @@ function fixLangSwitcher() {
 function fixHomeBannerAlt() {
 	// Roch Lambert - Fix the homepage alternative text
 	if(getCookie("language")==="fr"){
-		setTimeout(function() {
-			// Update the alternative text on the homepage
-			$("#banner").find("img").attr("alt", "Une bannière avec 2 logos, le Congrès canadien sur l'inclusion des personnes en situation de handicap, 26-27 mai 2022. Une image des points connectés qui représente les partenariats et la collaboration au sein du gouvernement du Canada.");
-		}, 1000);
+		// Update the alternative text on the homepage
+		$("#banner").find("img").attr("alt", "Une bannière avec 2 logos, le Congrès canadien sur l'inclusion des personnes en situation de handicap, 26-27 mai 2022. Une image des points connectés qui représente les partenariats et la collaboration au sein du gouvernement du Canada.");
 	} else {
-		setTimeout(function() {
-			// Update the alternative text on the homepage
-			$("#banner").find("img").attr("alt", "A banner with 2 logos, the Canadian Congress on Disability Inclusion, May 26-27 2022. An image of connected dots that signifies partnerships and collaboration within the Government of Canada.");
-		}, 1000);
+		// Update the alternative text on the homepage
+		$("#banner").find("img").attr("alt", "A banner with 2 logos, the Canadian Congress on Disability Inclusion, May 26-27 2022. An image of connected dots that signifies partnerships and collaboration within the Government of Canada.");
 	}
 } // End of fixHomeBannerAlt
 
@@ -53,54 +61,46 @@ function fixLangModal() {
 
 function fixRequestPasswordModal () {
 	$('div#login-form-container>div.mt-3>a:first').click(function () {
-		setTimeout(function () {
-			$('div.swal-title').replaceWith("<h2 id='reqNewPasswordH2' class='swal-title'>" + $('div.swal-title').html() + "</h2>");
-			$('div.swal-text').replaceWith("<label class='swal-text' for='reqNewPasswordTxt' id='reqNewPasswordLbl'>" + $('div.swal-text').html() +"</label>");
-			$('input.swal-content__input').attr("id", "reqNewPasswordTxt").attr("autocomplete","email");
-    
-			let observer = new MutationObserver(mutationRecords => {
-				for (let mutation of mutationRecords) {
-					if (mutation.type === 'attributes' && mutation.oldValue.match(/swal-overlay--show-modal/)) {
-						$('div#login-form-container>div.mt-3>a:first').focus();
-					}
+		$('div.swal-title').replaceWith("<h2 id='reqNewPasswordH2' class='swal-title'>" + $('div.swal-title').html() + "</h2>");
+		$('div.swal-text').replaceWith("<label class='swal-text' for='reqNewPasswordTxt' id='reqNewPasswordLbl'>" + $('div.swal-text').html() +"</label>");
+		$('input.swal-content__input').attr("id", "reqNewPasswordTxt").attr("autocomplete","email");
+
+		let observer = new MutationObserver(mutationRecords => {
+			for (let mutation of mutationRecords) {
+				if (mutation.type === 'attributes' && mutation.oldValue.match(/swal-overlay--show-modal/)) {
+					$('div#login-form-container>div.mt-3>a:first').focus();
 				}
-			});
-			let nd = $('div.swal-overlay--show-modal')[0];
-			observer.observe(nd, {attributes : true, attributeFilter: ['class'], attributeOldValue : true});
-		}, 200);
+			}
+		});
+		let nd = $('div.swal-overlay--show-modal')[0];
+		observer.observe(nd, {attributes : true, attributeFilter: ['class'], attributeOldValue : true});
 	});
 } // End of fixRequestPasswordModal
 
 function fixChatWhiteSpace () {
-	setTimeout(function() {		
-		// Fix the chat bug with the extra whitespace
-		// Lobby section - expanding the content area to full width
-		$("div#content").attr("class", "col-12 col-xl-12");
+	// Fix the chat bug with the extra whitespace
+	// Lobby section - expanding the content area to full width
+	$("div#content").attr("class", "col-12 col-xl-12");
 
-		// Channels / Sessions section - expanding the content area to full width
-		$("div#session-container").attr("class", "col-xl-12 scroll-fader");
+	// Channels / Sessions section - expanding the content area to full width
+	$("div#session-container").attr("class", "col-xl-12 scroll-fader");
 
-		// Career Fair / Showcase section - expanding the content area to full width
-		$("div#exhibitor-container").attr("class", "col-xl-12 scroll-fader");
+	// Career Fair / Showcase section - expanding the content area to full width
+	$("div#exhibitor-container").attr("class", "col-xl-12 scroll-fader");
 
-		// Networking section - expanding the content area to full width
-		$("div#attendee-container").attr("class", "col-xl-12 scroll-fader");
-		
-		// Networking section - Groups - expanding the content area to full width
-		$("div#group-container").attr("class", "col-xl-12 scroll-fader");
-	}, 1000);
+	// Networking section - expanding the content area to full width
+	$("div#attendee-container").attr("class", "col-xl-12 scroll-fader");
+	
+	// Networking section - Groups - expanding the content area to full width
+	$("div#group-container").attr("class", "col-xl-12 scroll-fader");
 } // End of fixChatWhiteSpace
 
 function fixProfilePicAlt () {
-	setTimeout(function() {
-		// Update the alternative text on the homepage
-		$(".pr-3").find("img").attr("alt", "");
-	}, 1000);
+	// Update the alternative text on the homepage
+	$(".pr-3").find("img").attr("alt", "");
 } // End of fixProfilePicAlt
 
 function fixPheedloopAdAlt () {
-	setTimeout(function() {
-		// Update the alternative text on the homepage
-		$("#ad-checker").attr("alt", "");
-	}, 1000);
+	// Update the alternative text on the homepage
+	$("#ad-checker").attr("alt", "");
 } // End of fixPheedloopAdAlt
