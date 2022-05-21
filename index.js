@@ -1,4 +1,4 @@
-$(document).ready(function() {
+﻿$(document).ready(function() {
 	// Set timeout and ensure page is ready for a11y fixes
 	setTimeout(function() {
 		fixAllPages ();
