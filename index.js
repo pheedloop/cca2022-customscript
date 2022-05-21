@@ -559,11 +559,11 @@ function fixLobbyHeadings() {
 
 function fixGlobalNavHeadings() {
 	// Let's add a heading for the left navigation
-	$('#sidebar').prepend('<h1 class="wb-inv">Menu</h1>');
+	$('#sidebar').prepend('<h2 class="wb-inv">Menu</h2>');
 	// Let's add a heading for the tools section
 	if(getCookie("language")==="fr"){
-		$('#header').find('div.mr-4').prepend('<h1 class="wb-inv">Sélection de la langue et outils</h1>');
+		$('#header').find('div.mr-4').prepend('<h2 class="wb-inv">Sélection de la langue et outils</h2>');
 	} else {
-		$('#header').find('div.mr-4').prepend('<h1 class="wb-inv">Language selection and tools</h1>');
+		$('#header').find('div.mr-4').prepend('<h2 class="wb-inv">Language selection and tools</h2>');
 	};
 } // End of fixToggleButton
