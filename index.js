@@ -124,6 +124,8 @@ function fixNotifications() {
 	// Andrew Nordlund - Give the Notifications button an accessible name.  Start with the word "Notifications"
 	$('#notifications-toggle').append($('<span id="notification-word" style="display:none;"></span>').text("Notifications"));
 	$('#notifications-toggle').attr("aria-labelledby", "notification-word notification-count");	
+	// Remove the unnecessary aria-label
+	$('#notification-count').removeAttr('aria-label');
 } // End of fixNotifications
 
 function fixLiveCount() {
@@ -134,6 +136,8 @@ function fixLiveCount() {
 		$('#live-count-container').append($('<span id="live-count-word" style="display:none;"></span>').text("Live attendees"));
 	};
 	$('#live-count').attr("aria-labelledby", "live-count-word");
+	// Remove the unnecessary aria-label
+	$('#live-count-container').removeAttr('aria-label');
 } // End of fixLiveCount
 
 function fixRequestPasswordModal () {
