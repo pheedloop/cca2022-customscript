@@ -53,6 +53,8 @@ function fixAllPages () {
 	fixLangModal();
 	fixProfilePicAlt();
 	fixPheedloopAdAlt();
+	fixNotifications();
+	fixLiveCount();
 } // End of fixAllPages
 
 function fixLoginPage() {
@@ -98,7 +100,9 @@ function fixAccountPageReload() {
 
 function fixLangSwitcher() {
 	// Andrew Nordlund - Add lang attributes to the language switcher:
-	$('#languages-modal a.list-group-item.list-group-item-action:contains("Français")').html('<span lang="en">French</span> (<span lang="fr">Français</span>)');
+	$('#languages-modal>a.list-group-item:contains("Français")').html('<span lang="en">French</span> (<span lang="fr">Français</span>)');
+	// Original code?
+	//$("a:contains('Français')").html('<span lang="en">French</span> (<span lang="fr">Français</span>)');
 } // End of fixAllPages
 
 function fixHomeBannerAlt() {
@@ -117,6 +121,22 @@ function fixLangModal() {
 	$('#languages-modal>div>div.modal-content>div.modal-header>h5:first-child').replaceWith("<h2 class='h5'>" + $('#languages-modal>div>div.modal-content>div.modal-header>h5:first-child').html() + "</h2>");
 	$('#languages-modal>div>div.modal-content>div.modal-header>button.close').attr("aria-label", "Close");
 } // End of fixLangModal
+
+function fixNotifications() {
+	// Andrew Nordlund - Give the Notifications button an accessible name.  Start with the word "Notifications"
+	$('#notifications-toggle').append($('<span id="notification-word" style="display:none;"></span>').text("Notifications"));
+	$('#notifications-toggle').attr("aria-labelledby", "notification-word notification-count");	
+} // End of fixNotifications
+
+function fixLiveCount() {
+	// Roch Lambert - Give the Livecount information an accessible name. Start with the word "Live attendees"
+	if(getCookie("language")==="fr"){
+		$('#live-count-container').append($('<span id="live-count-word" style="display:none;"></span>').text("Participants en ligne"));
+	} else {
+		$('#live-count-container').append($('<span id="live-count-word" style="display:none;"></span>').text("Live attendees"));
+	}
+	$('#live-count').attr("aria-labelledby", "live-count-word");
+} // End of fixLiveCount
 
 function fixRequestPasswordModal () {
 	$('div#login-form-container>div.mt-3>a:first').click(function () {
