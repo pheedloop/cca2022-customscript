@@ -54,6 +54,7 @@ function fixAllPages () {
 	fixNotifications();
 	fixLiveCount();
 	fixHelpDialog();
+	fixToggleButton();
 } // End of fixAllPages
 
 function fixLoginPage() {
@@ -111,7 +112,7 @@ function fixHomeBannerAlt() {
 	} else {
 		// Update the alternative text on the homepage
 		$("#banner").find("img").attr("alt", "A banner with 2 logos, the Canadian Congress on Disability Inclusion, May 26-27 2022. An image of connected dots that signifies partnerships and collaboration within the Government of Canada.");
-	}
+	};
 } // End of fixHomeBannerAlt
 
 function fixLangModal() {
@@ -534,9 +535,16 @@ function fixHelpDialog() {
 } // End of fixHelpDialog
 
 function fixNetworkDeviceTranslations() {
-	// First we need to check if the iframe is loaded
-	$('#live-meeting').on('load', function() {
-		// Fix the heading title translation
-		$('#live-meeting').contents().find("#root").find('h4:first').html("Paramètres du dispositif");
-	});
+	if(getCookie("language")==="fr"){
+		// First we need to check if the iframe is loaded
+		$('#live-meeting').on('load', function() {
+			// Fix the heading title translation
+			$('#live-meeting').contents().find("#root").find('h4:first').html("Paramètres du dispositif");
+		});
+	};
 } // End of fixNetworkDeviceTranslations
+
+function fixToggleButton() {
+	$('#sidebar').find('#toggle-icon').remove();
+	$('#sidebar').find('#toggle-icon-hidden').remove();
+} // End of fixToggleButton
