@@ -22,7 +22,7 @@
 	}, 5000);
 });
 
-// Need to re-execute jQuery when dynamically updating content
+/* // Need to re-execute jQuery when dynamically updating content
 $('#page').bind('DOMSubtreeModified', function(e) {
 	$(document).ready(function() {
 		// Set timeout and ensure page is ready for a11y fixes
@@ -43,7 +43,7 @@ $('#page').bind('DOMSubtreeModified', function(e) {
 			if (window.location.href.match(/\/CCA2022\/virtual\/\?page=settings/i)) fixAccountPage();
 		}, 2500);
 	});
-});
+}); */
 
 // fixAllPages fixes everything that appears across the Virtual Platform
 function fixAllPages () {
@@ -572,7 +572,6 @@ function fixGlobalNavHeadings() {
 function fixSpeakerBioWall() {
 		// Let's split the paragraphs for the bio's in two because it's long!
 		var text = $('#speakers>div.card-body>ul.list-unstyled>div.mt-1>p').text();
-		//$('#speakers>div.card-body>ul.list-unstyled>div.mt-1').prepend('<h2 class="wb-inv">Biography text</h2>');
 		var tokens = text.split('. ');
 		var n = Math.floor(tokens.length/2);
 		var htmltext = '<p>'+tokens.slice(0, n).join('.') + '.</p><p>' + tokens.slice(n+1, tokens.length).join('.') + '</p>';
