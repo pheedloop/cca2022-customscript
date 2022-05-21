@@ -86,6 +86,7 @@ function fixNetworkingPage() {
 
 function fixAccountPage() {
 	fixAccountHeadings();
+	fixAccountForm();
 } // End of fixAccountPage
 
 function fixLangSwitcher() {
@@ -176,3 +177,35 @@ function fixAccountHeadings () {
 		$('#page').prepend('<h1 class="wb-inv">Account information</h1>');
 	}
 } // End of fixAccountHeadings
+
+function fixAccountForm () {
+	// Andrew Nordlund - change text, password, urls, and textareas to have associated labels
+	$(":text, :password, input[type=url], textarea").each(function() {
+		let nm = $(this).attr("name");
+		$(this).attr("id", nm);
+		$(this).prev().attr("for", nm);
+	});
+	
+	// Andrew Nordlund - fix the timezone input
+	let tz = $("#timezone");
+	tz.prev().find(">:first-child").attr("id", "tz-desc");
+	tz.attr("aria-describedby", "tz-desc");
+	tz.prev().prev().attr("for", "timezone");
+	
+	// Andrew Nordlund - fix toggle switches to give them a label
+	$("input[type=checkbox]").each(function(i) {
+		let pn = $(this).parent();
+		let lbl = pn.next();
+		pn.replaceWith('<span class="switch">' + pn.html() + '</span>');
+		lbl.replaceWith('<label class="pl-3 pb-1" for="' + $(this).attr("id") +'">' + lbl.html() + '</label>');
+	});
+	
+	// Andrew Nordlund - Fix file inputs...except <input type=file aria-describedby> doesn't enjoy wide support.
+	$(":file").each(function(index) {
+		let pn = $(this).parents("div.form-group");
+		pn.find("small").attr("id", "small" + index);
+		let lbl = pn.find("label.mb-0");
+		lbl.replaceWith('<legend class="mb-0" style="font-size:1.0rem;" id="legend' + index + '">' + lbl.html() + '</legend>');
+		pn.replaceWith('<fieldset class="form-group" aria-labelledby="legend' + index + ' small' + index + '">' + pn.html() + '</fieldset>');    
+	});
+} // End of fixAccountForm
