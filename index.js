@@ -84,6 +84,7 @@ function fixShowcasePage() {
 
 function fixNetworkingPage() {
 	fixChatWhiteSpaceNetworking();
+	fixNetworkDeviceTranslations();
 } // End of fixNetworkingPage
 
 function fixAccountPage() {
@@ -99,15 +100,14 @@ function fixAccountPageReload() {
 
 function fixLangSwitcher() {
 	// Roch Lambert - Add lang attributes to the language switcher:
-	//$("#languages-modal").find("a:contains('Français')").html('<span lang="en">French</span> (<span lang="fr">Français</span>)');
-	$("a:contains('Français')").html('<span lang="en">French</span> (<span lang="fr">Français</span>)');
+	$("#languages-modal").find("a:contains('FranÃ§ais')").html('<span lang="en">French</span> (<span lang="fr">FranÃ§ais</span>)');
 } // End of fixLangSwitcher
 
 function fixHomeBannerAlt() {
 	// Roch Lambert - Fix the homepage alternative text
 	if(getCookie("language")==="fr"){
 		// Update the alternative text on the homepage
-		$("#banner").find("img").attr("alt", "Une bannière avec 2 logos, le Congrès canadien sur l'inclusion des personnes en situation de handicap, 26-27 mai 2022. Une image des points connectés qui représente les partenariats et la collaboration au sein du gouvernement du Canada.");
+		$("#banner").find("img").attr("alt", "Une banniÃ¨re avec 2 logos, le CongrÃ¨s canadien sur l'inclusion des personnes en situation de handicap, 26-27 mai 2022. Une image des points connectÃ©s qui reprÃ©sente les partenariats et la collaboration au sein du gouvernement du Canada.");
 	} else {
 		// Update the alternative text on the homepage
 		$("#banner").find("img").attr("alt", "A banner with 2 logos, the Canadian Congress on Disability Inclusion, May 26-27 2022. An image of connected dots that signifies partnerships and collaboration within the Government of Canada.");
@@ -532,3 +532,11 @@ function fixHelpDialog() {
 	// Set the correct title
 	$('#instructions-modal').attr("aria-labelledby","instructions-modal-heading");
 } // End of fixHelpDialog
+
+function fixNetworkDeviceTranslations() {
+	// First we need to check if the iframe is loaded
+	$('#live-meeting').on('load', function() {
+		// Fix the heading title translation
+		$('#live-meeting').contents().find("#root").find('h4:first').html("ParamÃ¨tres du dispositif");
+	});
+} // End of fixNetworkDeviceTranslations
