@@ -7,11 +7,46 @@ $(document).ready(function() {
 		if (document.location.pathname == "/CCA2022/login/auth/") fixLoginPage();
 		// If on the lobby page:
 		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=lobby/i)) fixLobbyPage();
-		// If on the account page:
-		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=settings/i)) fixAccountPage();
+		// If on the channels page:
+		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=channels/i)) fixChannelsPage();
 		// If on the sessions page:
 		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=sessions/i)) fixSessionsPage();
+		// If on the career fair page:
+		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=exhibitors/i)) fixCareerFairPage();
+		// If on the showcase page:
+		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=showcase/i)) fixShowcasePage();
+		// If on the networking page:
+		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=attendees/i)) fixNetworkingPage();
+		// If on the account page:
+		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=settings/i)) fixAccountPage();
 	}, 2500);
+});
+
+// Need to re-execute jQuery when dynamically updating content
+$('#page').bind('DOMSubtreeModified', function(e) {
+	$(document).ready(function() {
+		// Set timeout and ensure page is ready for a11y fixes
+		setTimeout(function() {
+			// No need to run the fixAllPages() function since that content is not updated dynamically
+			
+			// If on the login page:
+			if (document.location.pathname == "/CCA2022/login/auth/") fixLoginPage();
+			// If on the lobby page:
+			if (window.location.href.match(/\/CCA2022\/virtual\/\?page=lobby/i)) fixLobbyPage();
+			// If on the channels page:
+			if (window.location.href.match(/\/CCA2022\/virtual\/\?page=channels/i)) fixChannelsPage();
+			// If on the sessions page:
+			if (window.location.href.match(/\/CCA2022\/virtual\/\?page=sessions/i)) fixSessionsPage();
+			// If on the career fair page:
+			if (window.location.href.match(/\/CCA2022\/virtual\/\?page=exhibitors/i)) fixCareerFairPage();
+			// If on the showcase page:
+			if (window.location.href.match(/\/CCA2022\/virtual\/\?page=showcase/i)) fixShowcasePage();
+			// If on the networking page:
+			if (window.location.href.match(/\/CCA2022\/virtual\/\?page=attendees/i)) fixNetworkingPage();
+			// If on the account page:
+			if (window.location.href.match(/\/CCA2022\/virtual\/\?page=settings/i)) fixAccountPage();
+		}, 2500);
+	});
 });
 
 // fixAllPages fixes everything that appears across the Virtual Platform
@@ -28,14 +63,32 @@ function fixLoginPage() {
 } // End of fixLoginPage
 
 function fixLobbyPage() {
-	fixHomeBannerAlt();	
+	fixHomeBannerAlt();
+	fixChatWhiteSpaceLobby();	
 } // End of fixLobbyPage
+
+function fixChannelsPage() {
+	fixChatWhiteSpaceChannelsSessions();
+} // End of fixChannelsPage
+
+function fixSessionsPage() {
+	fixChatWhiteSpaceChannelsSessions();
+} // End of fixSessionsPage
+
+function fixCareerFairPage() {
+	fixChatWhiteSpaceCareerFairShowcase();
+} // End of fixCareerFairPage
+
+function fixShowcasePage() {
+	fixChatWhiteSpaceCareerFairShowcase();
+} // End of fixShowcasePage
+
+function fixNetworkingPage() {
+	fixChatWhiteSpaceNetworking();
+} // End of fixNetworkingPage
 
 function fixAccountPage() {
 } // End of fixAccountPage
-
-function fixSessionsPage() {
-} // End of fixSessionsPage
 
 function fixLangSwitcher() {
 	// Andrew Nordlund - Add lang attributes to the language switcher:
@@ -77,23 +130,31 @@ function fixRequestPasswordModal () {
 	});
 } // End of fixRequestPasswordModal
 
-function fixChatWhiteSpace () {
+function fixChatWhiteSpaceLobby () {
 	// Fix the chat bug with the extra whitespace
 	// Lobby section - expanding the content area to full width
 	$("div#content").attr("class", "col-12 col-xl-12");
+} // End of fixChatWhiteSpaceLobby
 
+function fixChatWhiteSpaceChannelsSessions () {
+	// Fix the chat bug with the extra whitespace
 	// Channels / Sessions section - expanding the content area to full width
 	$("div#session-container").attr("class", "col-xl-12 scroll-fader");
+} // End of fixChatWhiteSpaceChannelsSessions
 
+function fixChatWhiteSpaceCareerFairShowcase () {
+	// Fix the chat bug with the extra whitespace
 	// Career Fair / Showcase section - expanding the content area to full width
 	$("div#exhibitor-container").attr("class", "col-xl-12 scroll-fader");
+} // End of fixChatWhiteSpaceCareerFairShowcase
 
+function fixChatWhiteSpaceNetworking () {
+	// Fix the chat bug with the extra whitespace
 	// Networking section - expanding the content area to full width
 	$("div#attendee-container").attr("class", "col-xl-12 scroll-fader");
-	
 	// Networking section - Groups - expanding the content area to full width
 	$("div#group-container").attr("class", "col-xl-12 scroll-fader");
-} // End of fixChatWhiteSpace
+} // End of fixChatWhiteSpaceNetworking
 
 function fixProfilePicAlt () {
 	// Update the alternative text on the homepage
