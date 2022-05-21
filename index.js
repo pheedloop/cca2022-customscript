@@ -19,7 +19,7 @@ $(document).ready(function() {
 		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=attendees/i)) fixNetworkingPage();
 		// If on the account page:
 		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=settings/i)) fixAccountPage();
-	}, 2500);
+	}, 5000);
 });
 
 /* // Need to re-execute jQuery when dynamically updating content
