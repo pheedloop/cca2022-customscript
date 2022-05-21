@@ -22,7 +22,7 @@ $(document).ready(function() {
 	}, 2500);
 });
 
-// Need to re-execute jQuery when dynamically updating content
+/* // Need to re-execute jQuery when dynamically updating content
 $('#page').bind('DOMSubtreeModified', function(e) {
 	$(document).ready(function() {
 		// Set timeout and ensure page is ready for a11y fixes
@@ -45,7 +45,7 @@ $('#page').bind('DOMSubtreeModified', function(e) {
 			if (window.location.href.match(/\/CCA2022\/virtual\/\?page=settings/i)) fixAccountPageReload();
 		}, 2500);
 	});
-});
+}); */
 
 // fixAllPages fixes everything that appears across the Virtual Platform
 function fixAllPages () {
