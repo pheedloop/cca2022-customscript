@@ -99,11 +99,9 @@ function fixAccountPageReload() {
 } // End of fixAccountPage
 
 function fixLangSwitcher() {
-	// Andrew Nordlund - Add lang attributes to the language switcher:
-	$('#languages-modal>a.list-group-item:contains("Français")').html('<span lang="en">French</span> (<span lang="fr">Français</span>)');
-	// Original code?
-	//$("a:contains('Français')").html('<span lang="en">French</span> (<span lang="fr">Français</span>)');
-} // End of fixAllPages
+	// Roch Lambert - Add lang attributes to the language switcher:
+	$("#languages-modal").find("a:contains('Français')").html('<span lang="en">French</span> (<span lang="fr">Français</span>)');
+} // End of fixLangSwitcher
 
 function fixHomeBannerAlt() {
 	// Roch Lambert - Fix the homepage alternative text
@@ -134,7 +132,7 @@ function fixLiveCount() {
 		$('#live-count-container').append($('<span id="live-count-word" style="display:none;"></span>').text("Participants en ligne"));
 	} else {
 		$('#live-count-container').append($('<span id="live-count-word" style="display:none;"></span>').text("Live attendees"));
-	}
+	};
 	$('#live-count').attr("aria-labelledby", "live-count-word");
 } // End of fixLiveCount
 
