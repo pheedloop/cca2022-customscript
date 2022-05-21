@@ -29,8 +29,6 @@ $('#page').bind('DOMSubtreeModified', function(e) {
 		setTimeout(function() {
 			fixAllPages ();
 			
-			// If on the login page:
-			if (document.location.pathname == "/CCA2022/login/auth/") fixLoginPage();
 			// If on the lobby page:
 			if (window.location.href.match(/\/CCA2022\/virtual\/\?page=lobby/i)) fixLobbyPage();
 			// If on the channels page:
@@ -87,6 +85,7 @@ function fixNetworkingPage() {
 } // End of fixNetworkingPage
 
 function fixAccountPage() {
+	fixAccountHeadings();
 } // End of fixAccountPage
 
 function fixLangSwitcher() {
@@ -164,3 +163,16 @@ function fixPheedloopAdAlt () {
 	// Update the alternative text on the homepage
 	$("#ad-checker").attr("alt", "");
 } // End of fixPheedloopAdAlt
+
+function fixAccountHeadings () {
+	// Andrew Nordlund - Should fix heading structure.
+	$('h1.card-header').each(function () {
+		$(this).replaceWith('<h2 class="card-header">' + $(this).html() + '</h2>');
+	});
+	// Now add hidden <h1> for semantic purposes
+	if(getCookie("language")==="fr"){
+		$('#page').prepend('<h1 class="wb-inv">Informations sur le compte</h1>');
+	} else {
+		$('#page').prepend('<h1 class="wb-inv">Account information</h1>');
+	}
+} // End of fixAccountHeadings
