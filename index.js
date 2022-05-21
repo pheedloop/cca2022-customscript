@@ -4,7 +4,7 @@ $(document).ready(function() {
 
 	// If on the login page:
 	if (document.location.pathname == "/CCA2022/login/auth/") fixLoginPage();
-	// If on the home page:
+	// If on the lobby page:
 	if (window.location.href.match(/\/CCA2022\/virtual\/\?page=lobby/i)) fixLobbyPage();
 });
 
@@ -13,6 +13,8 @@ function fixAllPages () {
 	fixLangSwitcher();
 	fixLangModal();
 	fixChatWhiteSpace();
+	fixProfilePicAlt();
+	fixPheedloopAdAlt();
 } // End of fixAllPages
 
 function fixLoginPage() {
@@ -21,7 +23,7 @@ function fixLoginPage() {
 
 function fixLobbyPage() {
 	fixHomeBannerAlt();	
-} // End of fixLoginPage
+} // End of fixLobbyPage
 
 function fixLangSwitcher() {
 	// Andrew Nordlund - Add lang attributes to the language switcher:
@@ -88,3 +90,17 @@ function fixChatWhiteSpace () {
 		$("div#group-container").attr("class", "col-xl-12 scroll-fader");
 	}, 1000);
 } // End of fixChatWhiteSpace
+
+function fixProfilePicAlt () {
+	setTimeout(function() {
+		// Update the alternative text on the homepage
+		$(".pr-3").find("img").attr("alt", "");
+	}, 1000);
+} // End of fixProfilePicAlt
+
+function fixPheedloopAdAlt () {
+	setTimeout(function() {
+		// Update the alternative text on the homepage
+		$("#ad-checker").attr("alt", "");
+	}, 1000);
+} // End of fixPheedloopAdAlt
