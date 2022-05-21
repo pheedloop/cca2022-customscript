@@ -55,6 +55,7 @@ function fixAllPages () {
 	fixLiveCount();
 	fixHelpDialog();
 	fixToggleButton();
+	fixGlobalNavHeadings();
 } // End of fixAllPages
 
 function fixLoginPage() {
@@ -553,5 +554,16 @@ function fixLobbyHeadings() {
 		$('#announcements').prepend('<h1 class="wb-inv">Annonces</h1>');
 	} else {
 		$('#announcements').prepend('<h1 class="wb-inv">Announcements</h1>');
+	};
+} // End of fixToggleButton
+
+function fixGlobalNavHeadings() {
+	// Let's add a heading for the left navigation
+	$('#sidebar').prepend('<h1 class="wb-inv">Menu</h1>');
+	// Let's add a heading for the tools section
+	if(getCookie("language")==="fr"){
+		$('#header').find('div.mr-4').prepend('<h1 class="wb-inv">Sélection de la langue et outils</h1>');
+	} else {
+		$('#header').find('div.mr-4').prepend('<h1 class="wb-inv">Language selection and tools</h1>');
 	};
 } // End of fixToggleButton
