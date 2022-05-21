@@ -42,7 +42,7 @@ $('#page').bind('DOMSubtreeModified', function(e) {
 			// If on the networking page:
 			if (window.location.href.match(/\/CCA2022\/virtual\/\?page=attendees/i)) fixNetworkingPage();
 			// If on the account page:
-			if (window.location.href.match(/\/CCA2022\/virtual\/\?page=settings/i)) fixAccountPage();
+			if (window.location.href.match(/\/CCA2022\/virtual\/\?page=settings/i)) fixAccountPageReload();
 		}, 2500);
 	});
 });
@@ -85,6 +85,12 @@ function fixNetworkingPage() {
 } // End of fixNetworkingPage
 
 function fixAccountPage() {
+	fixAccountHeadings();
+	fixAccountHeadingsH1();
+	fixAccountForm();
+} // End of fixAccountPage
+
+function fixAccountPageReload() {
 	fixAccountHeadings();
 	fixAccountForm();
 } // End of fixAccountPage
@@ -170,13 +176,16 @@ function fixAccountHeadings () {
 	$('h1.card-header').each(function () {
 		$(this).replaceWith('<h2 class="card-header">' + $(this).html() + '</h2>');
 	});
+} // End of fixAccountHeadings
+
+function fixAccountHeadingsH1 () {
 	// Now add hidden <h1> for semantic purposes
 	if(getCookie("language")==="fr"){
 		$('#page').prepend('<h1 class="wb-inv">Informations sur le compte</h1>');
 	} else {
 		$('#page').prepend('<h1 class="wb-inv">Account information</h1>');
 	}
-} // End of fixAccountHeadings
+} // End of fixAccountHeadingsH1
 
 function fixAccountForm () {
 	// Andrew Nordlund - change text, password, urls, and textareas to have associated labels
