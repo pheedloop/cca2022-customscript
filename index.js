@@ -27,7 +27,7 @@ $('#page').bind('DOMSubtreeModified', function(e) {
 	$(document).ready(function() {
 		// Set timeout and ensure page is ready for a11y fixes
 		setTimeout(function() {
-			// No need to run the fixAllPages() function since that content is not updated dynamically
+			fixAllPages ();
 			
 			// If on the login page:
 			if (document.location.pathname == "/CCA2022/login/auth/") fixLoginPage();
@@ -53,7 +53,6 @@ $('#page').bind('DOMSubtreeModified', function(e) {
 function fixAllPages () {
 	fixLangSwitcher();
 	fixLangModal();
-	fixChatWhiteSpace();
 	fixProfilePicAlt();
 	fixPheedloopAdAlt();
 } // End of fixAllPages
