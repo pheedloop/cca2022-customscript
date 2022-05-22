@@ -1,7 +1,27 @@
 ﻿$(document).ready(function() {
+	// Andrew Nordlund - Since we're going to have to do all the things when the page loads,
+	// aaaaaaaannnnnnnndddddd whenever someone uses the left menu to go elsewhere,
+	// Imma move everything to another function, and call that from here, and I'll find a way to 
+	// run it at other times too
+	
+	letErRip();
+
+
+	$('#sidebar>ul>li>button').each(function () {
+		$(this).click(function() {
+		  	setTimeout (function () {letErRip()}, 3000);
+		});
+	});
+});
+
+
+function letErRip () {
 	// Set timeout and ensure page is ready for a11y fixes
 	setTimeout(function() {
+		setCurrentPage();	// adds aria-current=page to the left menu
+
 		fixAllPages ();
+
 
 		// If on the login page:
 		if (document.location.pathname == "/CCA2022/login/auth/") fixLoginPage();
@@ -20,7 +40,7 @@
 		// If on the account page:
 		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=settings/i)) fixAccountPage();
 	}, 5000);
-});
+} // End of letErRip
 
 /* // Need to re-execute jQuery when dynamically updating content
 $('#page').bind('DOMSubtreeModified', function(e) {
@@ -577,3 +597,7 @@ function fixSpeakerBioWall() {
 		var htmltext = '<p>'+tokens.slice(0, n).join('.') + '.</p><p>' + tokens.slice(n+1, tokens.length).join('.') + '</p>';
 		$('#speakers>div.card-body>ul.list-unstyled>div.mt-1>p').html(htmltext);
 } // End of fixSpeakerBioWall
+
+function setCurrentPage () {
+	$('#sidebar>ul>li>button.active').parent().attr("aria-current","page");
+} // End of setCurrentPage
