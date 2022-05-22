@@ -194,10 +194,12 @@ function fixAccountHeadings () {
 		$(this).replaceWith('<h2 class="card-header">' + $(this).html() + '</h2>');
 	});
 	// Roch Lambert - Now add hidden <h1> for semantic purposes
-	if(getCookie("language")==="fr"){
-		$('#page').prepend('<h1 class="wb-inv">Informations sur le compte</h1>');
-	} else {
-		$('#page').prepend('<h1 class="wb-inv">Account information</h1>');
+	if (!$('h1#accInfoH1').length) {
+		if(getCookie("language")==="fr"){
+			$('#page').prepend('<h1 class="wb-inv" id="accInfo">Informations sur le compte</h1>');
+		} else {
+			$('#page').prepend('<h1 class="wb-inv" id="accInfo">Account information</h1>');
+		}
 	}
 } // End of fixAccountHeadings
 
@@ -552,22 +554,26 @@ function fixLobbyHeadings() {
 		$(this).replaceWith('<h2 class="card-title font-sz-xl font-weight-bold" lang="fr">' + $(this).html() + '</h2>');
 	});
 	// Now add a hidden <h1> for semantic purposes
-	if(getCookie("language")==="fr"){
-		$('#announcements').prepend('<h1 class="wb-inv">Annonces</h1>');
-	} else {
-		$('#announcements').prepend('<h1 class="wb-inv">Announcements</h1>');
-	};
+	if (!$('h1#annonceH1').length) {
+		if(getCookie("language")==="fr"){
+			$('#announcements').prepend('<h1 class="wb-inv" id="annonceH1">Annonces</h1>');
+		} else {
+			$('#announcements').prepend('<h1 class="wb-inv" id="annonceH1">Announcements</h1>');
+		};
+	}
 } // End of fixLobbyHeadings
 
 function fixGlobalNavHeadings() {
 	// Let's add a heading for the left navigation
-	$('#sidebar').prepend('<h2 class="wb-inv">Menu</h2>');
+	if (!$('h2#leftNavMenuH2').length) $('#sidebar').prepend('<h2 class="wb-inv" id="leftNavMenuH2">Menu</h2>');
 	// Let's add a heading for the tools section
-	if(getCookie("language")==="fr"){
-		$('#header').find('div.mr-4').prepend('<h2 class="wb-inv">Sélection de la langue et outils</h2>');
-	} else {
-		$('#header').find('div.mr-4').prepend('<h2 class="wb-inv">Language selection and tools</h2>');
-	};
+	if (!$('h2#langMenuH2').length) {
+		if(getCookie("language")==="fr") {
+			$('#header').find('div.mr-4').prepend('<h2 class="wb-inv" id="langMenuH2">Sélection de la langue et outils</h2>');
+		} else {
+			$('#header').find('div.mr-4').prepend('<h2 class="wb-inv" id="langMenuH2">Language selection and tools</h2>');
+		}
+	}
 } // End of fixGlobalNavHeadings
 
 function fixSpeakerBioWall() {
