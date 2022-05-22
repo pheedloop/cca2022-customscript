@@ -85,6 +85,7 @@ function fixNetworkingPage() {
 	fixChatWhiteSpaceNetworking();
 	fixNetworkDeviceTranslations();
 	fixNetworkingHeadings();
+	fixNetworkingNewContent();
 } // End of fixNetworkingPage
 
 function fixAccountPage() {
@@ -589,3 +590,8 @@ function setCurrentPage () {
 	$('#sidebar>ul>li[aria-current=page]').removeAttr("aria-current");
 	$('#sidebar>ul>li>button.active').parent().attr("aria-current","page");
 } // End of setCurrentPage
+
+function fixNetworkingNewContent () {
+	$('#attendees-container').removeAttr("aria-live");
+	$('#attendee-container').attr("aria-live","polite");
+} // End of fixNetworkingNewContent
