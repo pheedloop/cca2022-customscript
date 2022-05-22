@@ -9,7 +9,7 @@
 
 	$('#sidebar>ul>li>button').each(function () {
 		$(this).click(function() {
-		  	setTimeout (function () {letErRip()}, 3000);
+		  	letErRip();
 		});
 	});
 });
@@ -599,5 +599,6 @@ function fixSpeakerBioWall() {
 } // End of fixSpeakerBioWall
 
 function setCurrentPage () {
+	$('#sidebar>ul>li[aria-current=page]').removeAttr("aria-current");
 	$('#sidebar>ul>li>button.active').parent().attr("aria-current","page");
 } // End of setCurrentPage
