@@ -600,10 +600,10 @@ function fixNetworkingNewContent () {
 
 function fixSessionsAddIcon () {
 	// Loop through all the sessions
-/*	$('.sessions-container').find('div.session-selector').each(function () {
+	$('.sessions-container').find('div.session-selector').each(function () {
 		// Get value of the ID of the session
 		var sid = $(this).find("div.title>i").attr("id");
 		$(this).find('div.title>span').attr("id", sid + '-title');
 		$(this).find("div.title>i").attr("aria-labelledby", sid + '-title');
-	}); */
+	});
 } // End of fixSessionsAddIcon
