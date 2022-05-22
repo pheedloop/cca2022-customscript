@@ -6,7 +6,6 @@
 	
 	letErRip();
 
-
 	$('#sidebar>ul>li>button').each(function () {
 		$(this).click(function() {
 		  	letErRip();
@@ -18,10 +17,9 @@
 function letErRip () {
 	// Set timeout and ensure page is ready for a11y fixes
 	setTimeout(function() {
-		setCurrentPage();	// adds aria-current=page to the left menu
+		setCurrentPage();	// Adds aria-current=page to the left menu
 
-		fixAllPages ();
-
+		fixAllPages (); // Need to fix global a11y issues
 
 		// If on the login page:
 		if (document.location.pathname == "/CCA2022/login/auth/") fixLoginPage();
@@ -41,29 +39,6 @@ function letErRip () {
 		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=settings/i)) fixAccountPage();
 	}, 5000);
 } // End of letErRip
-
-/* // Need to re-execute jQuery when dynamically updating content
-$('#page').bind('DOMSubtreeModified', function(e) {
-	$(document).ready(function() {
-		// Set timeout and ensure page is ready for a11y fixes
-		setTimeout(function() {
-			// If on the lobby page:
-			if (window.location.href.match(/\/CCA2022\/virtual\/\?page=lobby/i)) fixLobbyPage();
-			// If on the channels page:
-			if (window.location.href.match(/\/CCA2022\/virtual\/\?page=channels/i)) fixChannelsPage();
-			// If on the sessions page:
-			if (window.location.href.match(/\/CCA2022\/virtual\/\?page=sessions/i)) fixSessionsPage();
-			// If on the career fair page:
-			if (window.location.href.match(/\/CCA2022\/virtual\/\?page=exhibitors/i)) fixCareerFairPage();
-			// If on the showcase page:
-			if (window.location.href.match(/\/CCA2022\/virtual\/\?page=showcase/i)) fixShowcasePage();
-			// If on the networking page:
-			if (window.location.href.match(/\/CCA2022\/virtual\/\?page=attendees/i)) fixNetworkingPage();
-			// If on the account page:
-			if (window.location.href.match(/\/CCA2022\/virtual\/\?page=settings/i)) fixAccountPage();
-		}, 2500);
-	});
-}); */
 
 // fixAllPages fixes everything that appears across the Virtual Platform
 function fixAllPages () {
@@ -109,6 +84,7 @@ function fixShowcasePage() {
 function fixNetworkingPage() {
 	fixChatWhiteSpaceNetworking();
 	fixNetworkDeviceTranslations();
+	fixNetworkingHeadings();
 } // End of fixNetworkingPage
 
 function fixAccountPage() {
@@ -558,6 +534,11 @@ function fixNetworkDeviceTranslations() {
 	};
 } // End of fixNetworkDeviceTranslations
 
+function fixNetworkingHeadings() {
+	// Fix the group networking as there is no <h1> element
+	$('#group-container').find('div#topic').replaceWith('<h1 id="topic" class="font-sz-xl font-weight-bold">' + $('#group-container').find('div#topic').html() + '</h1>')
+} // End of fixNetworkingHeadings
+
 function fixToggleButton() {
 	$('#sidebar').find('#toggle-icon').remove();
 	$('#sidebar').find('#toggle-icon-hidden').remove();
@@ -576,7 +557,7 @@ function fixLobbyHeadings() {
 	} else {
 		$('#announcements').prepend('<h1 class="wb-inv">Announcements</h1>');
 	};
-} // End of fixToggleButton
+} // End of fixLobbyHeadings
 
 function fixGlobalNavHeadings() {
 	// Let's add a heading for the left navigation
@@ -587,7 +568,7 @@ function fixGlobalNavHeadings() {
 	} else {
 		$('#header').find('div.mr-4').prepend('<h2 class="wb-inv">Language selection and tools</h2>');
 	};
-} // End of fixToggleButton
+} // End of fixGlobalNavHeadings
 
 function fixSpeakerBioWall() {
 		// Let's split the paragraphs for the bio's in two because it's long!
