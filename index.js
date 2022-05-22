@@ -602,8 +602,7 @@ function fixSessionsAddIcon () {
 	// Loop through all the sessions
 	$('.sessions-container').find('div.session-selector').each(function () {
 		// Get value of the ID of the session
-		//$(".session-selector>div.title>i").attr("aria-live","polite");
-		var sid = $(".session-selector>div.title>i").attr("id");
+		var sid = $(this).find(".session-selector>div.title>i").attr("id");
 		$('.session-selector>div.title>span').attr("id", sid + '-title');
 		$(".session-selector>div.title>i").attr("aria-labelledby", sid + '-title');
 	});
