@@ -51,6 +51,7 @@ function fixAllPages () {
 	fixHelpDialog();
 	fixToggleButton();
 	fixGlobalNavHeadings();
+	fixLeftNavIconFrench();
 } // End of fixAllPages
 
 function fixLoginPage() {
@@ -65,6 +66,8 @@ function fixLobbyPage() {
 
 function fixChannelsPage() {
 	fixChatWhiteSpaceChannelsSessions();
+	fixSessionsFrenchTranslations();
+	fixSpeakerBioWall();
 	fixSessionsAddIcon();
 } // End of fixChannelsPage
 
@@ -607,3 +610,8 @@ function fixSessionsAddIcon () {
 		$(this).find("div.title>i").attr("aria-labelledby", sid + '-title');
 	});
 } // End of fixSessionsAddIcon
+
+function fixLeftNavIconFrench () {
+	// Find french program link in sidebar and change class
+	$("#sidebar").find('i.fa-video').attr('class', 'fas fa-calendar-check icon');
+} // End of fixLeftNavIconFrench
