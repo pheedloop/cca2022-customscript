@@ -26,9 +26,9 @@ function letErRip () {
 		// If on the lobby page:
 		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=lobby/i)) fixLobbyPage();
 		// If on the channels page:
-		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=channels/i)) fixChannelsPage();
+		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=channels/i)) fixChannelsPage(); // French schedule
 		// If on the sessions page:
-		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=sessions/i)) fixSessionsPage();
+		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=sessions/i)) fixSessionsPage(); // English schedule
 		// If on the career fair page:
 		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=exhibitors/i)) fixCareerFairPage();
 		// If on the showcase page:
@@ -65,12 +65,14 @@ function fixLobbyPage() {
 
 function fixChannelsPage() {
 	fixChatWhiteSpaceChannelsSessions();
+	fixSessionsAddIcon();
 } // End of fixChannelsPage
 
 function fixSessionsPage() {
 	fixChatWhiteSpaceChannelsSessions();
 	fixSessionsFrenchTranslations();
 	fixSpeakerBioWall();
+	fixSessionsAddIcon();
 } // End of fixSessionsPage
 
 function fixCareerFairPage() {
@@ -592,6 +594,17 @@ function setCurrentPage () {
 } // End of setCurrentPage
 
 function fixNetworkingNewContent () {
-	$('#attendees-container').removeAttr("aria-live");
+	$('.attendees-container').removeAttr("aria-live");
 	$('#attendee-container').attr("aria-live","polite");
 } // End of fixNetworkingNewContent
+
+function fixSessionsAddIcon () {
+	// Loop through all the sessions
+	$('.sessions-container').find('div.session-selector').each(function () {
+		// Get value of the ID of the session
+		//$(".session-selector>div.title>i").attr("aria-live","polite");
+		var sid = $(".session-selector>div.title>i").attr("id");
+		$('.session-selector>div.title>span').attr("id", sid + '-title');
+		$(".session-selector>div.title>i").attr("aria-labelledby", sid + '-title');
+	});
+} // End of fixSessionsAddIcon
