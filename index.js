@@ -196,9 +196,9 @@ function fixAccountHeadings () {
 	// Roch Lambert - Now add hidden <h1> for semantic purposes
 	if (!$('h1#accInfoH1').length) {
 		if(getCookie("language")==="fr"){
-			$('#page').prepend('<h1 class="wb-inv" id="accInfo">Informations sur le compte</h1>');
+			$('#page').prepend('<h1 class="wb-inv" id="accInfoH1">Informations sur le compte</h1>');
 		} else {
-			$('#page').prepend('<h1 class="wb-inv" id="accInfo">Account information</h1>');
+			$('#page').prepend('<h1 class="wb-inv" id="accInfoH1">Account information</h1>');
 		}
 	}
 } // End of fixAccountHeadings
