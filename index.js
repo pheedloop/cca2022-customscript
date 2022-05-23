@@ -137,7 +137,7 @@ function fixGroupListings() {
 	
 	// Roch Lambert - Need delay to fix translation in french when clicking on the groups button
 	if(getCookie("language")==="fr") {
-		$('div#attendees-container>li.nav-item>a.nav-tab-network-groups').click(function () {
+		$('div.attendees-container>li.nav-item>a#nav-tab-network-groups').click(function () {
 			setTimeout (function () {
 				// Roch Lambert - Set the correct language
 				$('div#network-groups-list>div.d-flex>div.btn').each(function () {
@@ -737,7 +737,7 @@ function fixLoginDateTranslation () {
 function fixLeftNavFrenchSize () {
 	// Roch Lambert - Add fix for french navbar
 	if(getCookie("language")==="fr"){
-		$('#sidebar').append('<style>@media (min-width: 769px) {#sidebar {min-width: 300px !important; max-width: 300px !important;}}</style>');
+		$('#sidebar').append('<style>@media (min-width: 769px) {#sidebar {min-width: 275px !important; max-width: 275px !important;}}</style>');
 	};
 } // End of fixLeftNavFrenchSize
 
