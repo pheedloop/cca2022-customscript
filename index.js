@@ -25,7 +25,6 @@
 	});
 });
 
-
 function letErRip () {
 	// Set timeout and ensure page is ready for a11y fixes
 	setTimeout(function() {
@@ -108,6 +107,12 @@ function fixNetworkingPage() {
 	fixGroupListings();
 } // End of fixNetworkingPage
 
+function fixAccountPage() {
+	fixAccountHeadings();
+	fixAccountForm();
+	fixSpeakerBio();
+} // End of fixAccountPage
+
 function fixGroupListings() {
 	$('div#network-groups-list>div.group-item').each(function() {
 		$(this).addClass("border-0 text-left");
@@ -116,7 +121,6 @@ function fixGroupListings() {
 		});
    		// Convert the divs to buttons
 		divToButton(this);
-  
 	});
 
 	// Andrew Nordlund - for some reason I couldn't just attach a new click handler above.  It would get lost upon converting to <button>.  Even if I already converted to button.  This was the only way I could get it to work:  first convert the divs to buttons.  Then add click handlers to those buttons.
@@ -138,7 +142,6 @@ function fixPeopleListings() {
 	$('div#items-list div.item').each(function() {
 		$(this).addClass("border-0 text-left");
    		divToButton(this);
-  
 	});
 
 	// Andrew Nordlund - for some reason I couldn't just attach a new click handler above.  It would get lost upon converting to <button>.  Even if I already converted to button.  This was the only way I could get it to work:  first convert the divs to buttons.  Then add click handlers to those buttons.
@@ -182,12 +185,7 @@ function divToButtonOld (div) {
 		NewElement += ' ' + attrib.name + '="' + attrib.value + '"';
 	});
 	div.replaceWith(NewElement + ">"+ $(this).html() + "</button>");
-} // End of divToButton
-
-function fixAccountPage() {
-	fixAccountHeadings();
-	fixAccountForm();
-} // End of fixAccountPage
+} // End of divToButtonOld
 
 function fixLangSwitcher() {
 	// Roch Lambert - Add lang attributes to the language switcher:
@@ -732,3 +730,19 @@ function fixSessionsAccordion () {
 	// Roch Lambert - Find accordion and remove class to prevent accordion
 	$('#session-accordion').find('div.card-header').removeAttr("data-toggle data-target aria-expanded");
 } // End of fixSessionsAccordion
+
+function fixSpeakerBio () {
+	// Roch Lambert - Loop through all the speaker tags
+	$('div.attendee-tags').find('span.px-3').each(function () {
+		// Grab the text
+		var text = $(this).text();
+		// Test
+		$(this).attr("aria-live","polite");
+		// Now check if contains "Speaker"
+		//if (/speaker/i.test(text)) {
+		if $(this).(":contains(Speaker)") {
+			// Found speaker so set textarea bio to read-only
+			$("div.form-group").find('textarea[name="about"]').prop('readonly', true);
+		};
+	)};
+} // End of fixSpeakerBio
