@@ -729,19 +729,3 @@ function fixSessionsAccordion () {
 	// Roch Lambert - Find accordion and remove class to prevent accordion
 	$('#session-accordion').find('div.card-header').removeAttr("data-toggle data-target aria-expanded");
 } // End of fixSessionsAccordion
-
-function fixSpeakerBio () {
-	// Roch Lambert - Loop through all the speaker tags
-	$('.attendee-tags').find('span.px-3').each(function () {
-		// Grab the text
-		var text = $(this).text();
-		// Test
-		$(this).attr("aria-live","polite");
-		// Now check if contains "Speaker"
-		//if (/speaker/i.test(text)) {
-		if ($(this).is(':contains("Speaker")')) {
-			// Found speaker so set textarea bio to read-only
-			$("div.form-group").find('textarea[name="about"]').prop('readonly', true);
-		};
-	)};
-} // End of fixSpeakerBio
