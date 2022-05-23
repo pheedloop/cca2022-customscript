@@ -703,7 +703,7 @@ function fixSpeakerBioWall() {
 		var tokens = text.split('. ');
 		var n = Math.floor(tokens.length/2);
 		var htmltext = '<p>'+tokens.slice(0, n).join('.') + '.</p><p>' + tokens.slice(n+1, tokens.length).join('.') + '</p>';
-		$('#speakers>div.card-body>ul.list-unstyled>div.mt-1>p').html(htmltext);
+		$(this).find('p').html(htmltext);
 	});
 } // End of fixSpeakerBioWall
 
