@@ -38,9 +38,9 @@ function letErRip () {
 		// If on the lobby page:
 		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=lobby/i)) fixLobbyPage();
 		// If on the channels page:
-		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=channels/i)) fixChannelsPage(); // French schedule
+		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=channels/i)) {setupChannelsPageFixes (); fixChannelsPage();} // French schedule
 		// If on the sessions page:
-		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=sessions/i)) fixSessionsPage(); // English schedule
+		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=sessions/i)) {setupChannelsPageFixes(); fixChannelsPage();} // English schedule
 		// If on the career fair page:
 		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=exhibitors/i)) fixCareerFairPage();
 		// If on the showcase page:
@@ -78,7 +78,17 @@ function fixLobbyPage() {
 	fixLobbyHeadings();	
 } // End of fixLobbyPage
 
+function setupChannelsPageFixes () {
+	$('div.session-selector').click(function() {
+		setTimeout (function() {
+  			fixChannelsPage();
+		}, 1000);
+	});
+} // End of setupChannelsPageFixes
+
 function fixChannelsPage() {
+	// Andrew Nordlund - Okay, you need to do this on page load (after clicking a left nav button) _and_ after clicking on an event or speaker's info
+	// in the page.
 	fixChatWhiteSpaceChannelsSessions();
 	fixSessionsFrenchTranslations();
 	fixSpeakerBioWall();
@@ -125,8 +135,8 @@ function fixGroupListings() {
 			setTimeout (function () {
 				// Networking section - Groups - expanding the content area to full width
 				$("div#group-container").attr("class", "col-xl-12 scroll-fader");
-				fixNetworkDeviceTranslations();
 				fixNetworkingHeadings();
+				fixNetworkDeviceTranslations();
 				
 			}, 2000);
 		});
