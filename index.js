@@ -8,7 +8,19 @@
 
 	$('#sidebar>ul>li>button').each(function () {
 		$(this).click(function() {
-		  	letErRip();
+			if ($("#live-meeting").is(':visible')) {
+				// a modal will pop up asking "Are you sure you want to leave?"
+				// 1. let's check (and fix) the a11y of that modal; and 
+				// 2. only when "Yes" is clicked, we should leterrip
+				
+				fixWannaLeaveModal ();
+				$('div.swal-overlay>div.swal-modal button.swal-button.swal-button--confirm').click(function() {
+					letErRip();
+				});
+			} else {
+				letErRip();
+			}
+			
 		});
 	});
 });
@@ -158,6 +170,14 @@ function fixRequestPasswordModal () {
 		observer.observe(nd, {attributes : true, attributeFilter: ['class'], attributeOldValue : true});
 	});
 } // End of fixRequestPasswordModal
+
+function fixWannaLeaveModal () {
+	$('div.swal-overlay>div.swal-modal>div.swal-title').replaceWith("<h2 id='wannaLeaveH2' class='swal-title'>" + $('div.swal-overlay>div.swal-modal>div.swal-title').html() + "</h2>");
+	$('div.swal-overlay>div.swal-modal>div.swal-text').attr("id", "wannaLeaveTextDiv");
+	$('div.swal-overlay>div.swal-modal button.swal-button').each(function() {
+		$(this).attr("aria-describedby", "wannaLeaveH2 wannaLeaveTestDiv");
+	});
+} // End of fixWannaLeaveModal
 
 function fixChatWhiteSpaceLobby () {
 	// Fix the chat bug with the extra whitespace
