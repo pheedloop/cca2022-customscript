@@ -64,6 +64,7 @@ function fixAllPages () {
 	fixToggleButton();
 	fixGlobalNavHeadings();
 	fixLeftNavIconFrench();
+	fixLeftNavFrenchSize();
 } // End of fixAllPages
 
 function fixLoginPage() {
@@ -643,3 +644,10 @@ function fixLoginDateTranslation () {
 		$("#login-form-container").find('div.text-secondary').text('26 mai 2022 - 27 mai 2022');
 	};
 } // End of fixLoginDateTranslation
+
+function fixLeftNavFrenchSize () {
+	// Roch Lambert - Add fix for french navbar
+	if(getCookie("language")==="fr"){
+		$('#sidebar').append('<style>@media (min-width: 769px) {#sidebar {min-width: 250px !important; max-width: 250px !important;}}</style>');
+	};
+} // End of fixLeftNavFrenchSize
