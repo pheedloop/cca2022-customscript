@@ -118,6 +118,10 @@ function fixGroupListings() {
 		$(this).addClass("border-0 text-left");
 		$(this).find('button').each(function() {
 			$(this).replaceWith("<div class='btn btn-light btn-sm font-sz-sm m-0 p-1 px-3 mr-3'>" + $(this).html() + "</div>");
+			// Roch Lambert - While here set the correct language for the live attribute
+			if(getCookie("language")==="fr") {
+				$(this).text('En direct');
+			};
 		});
    		// Convert the divs to buttons
 		divToButton(this);
@@ -131,7 +135,6 @@ function fixGroupListings() {
 				$("div#group-container").attr("class", "col-xl-12 scroll-fader");
 				fixNetworkDeviceTranslations();
 				fixNetworkingHeadings();
-				
 			}, 2000);
 		});
 	});
