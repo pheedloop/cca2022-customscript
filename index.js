@@ -697,12 +697,14 @@ function fixGlobalNavHeadings() {
 } // End of fixGlobalNavHeadings
 
 function fixSpeakerBioWall() {
+	$('#speakers').find('div.card-body').find('ul.list-unstyled>div.mt-1').each(function () {
 		// Let's split the paragraphs for the bio's in two because it's long!
-		var text = $('#speakers>div.card-body>ul.list-unstyled>div.mt-1>p').text();
+		var text = $(this).find('p').text();
 		var tokens = text.split('. ');
 		var n = Math.floor(tokens.length/2);
 		var htmltext = '<p>'+tokens.slice(0, n).join('.') + '.</p><p>' + tokens.slice(n+1, tokens.length).join('.') + '</p>';
 		$('#speakers>div.card-body>ul.list-unstyled>div.mt-1>p').html(htmltext);
+	});
 } // End of fixSpeakerBioWall
 
 function setCurrentPage () {
