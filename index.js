@@ -83,6 +83,7 @@ function fixChannelsPage() {
 	fixSessionsFrenchTranslations();
 	fixSpeakerBioWall();
 	fixSessionsAddIcon();
+	fixSessionsAccordion();
 } // End of fixChannelsPage
 
 function fixSessionsPage() {
@@ -90,6 +91,7 @@ function fixSessionsPage() {
 	fixSessionsFrenchTranslations();
 	fixSpeakerBioWall();
 	fixSessionsAddIcon();
+	fixSessionsAccordion();
 } // End of fixSessionsPage
 
 function fixCareerFairPage() {
@@ -651,3 +653,8 @@ function fixLeftNavFrenchSize () {
 		$('#sidebar').append('<style>@media (min-width: 769px) {#sidebar {min-width: 250px !important; max-width: 250px !important;}}</style>');
 	};
 } // End of fixLeftNavFrenchSize
+
+function fixSessionsAccordion () {
+	// Roch Lambert - Find accordion and remove class to prevent accordion
+	$('#session-accordion').find('div.card-header').removeAttr("data-toggle data-target aria-expanded");
+} // End of fixSessionsAccordion
