@@ -110,6 +110,7 @@ function fixNetworkingPage() {
 function fixAccountPage() {
 	fixAccountHeadings();
 	fixAccountForm();
+	fixSpeakerBio();
 } // End of fixAccountPage
 
 function fixGroupListings() {
