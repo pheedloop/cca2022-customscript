@@ -126,7 +126,7 @@ function fixGroupListings() {
 				$("div#group-container").attr("class", "col-xl-12 scroll-fader");
 				fixNetworkDeviceTranslations();
 				fixNetworkingHeadings();
-				fixNetworkingNewContent();
+				
 			}, 2000);
 		});
 	});
@@ -134,7 +134,7 @@ function fixGroupListings() {
 
 function fixPeopleListings() {
 	// First set all those divs to buttons
-	$('div#item-list div.item').each(function() {
+	$('div#items-list div.item').each(function() {
 		$(this).addClass("border-0 text-left");
    		divToButton(this);
   
@@ -150,6 +150,7 @@ function fixPeopleListings() {
 				$('div.swal-overlay>div.swal-modal button.swal-button.swal-button--confirm').click(function() {
 					setTimeout (function () {
 						fixChatWhiteSpaceNetworking ();
+						fixNetworkingNewContent();
 					}, 2000);
 				});
 			});
