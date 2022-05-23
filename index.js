@@ -739,9 +739,10 @@ function fixLoginDateTranslation () {
 
 function fixLeftNavFrenchSize () {
 	// Roch Lambert - Add fix for french navbar
-	if(getCookie("language")==="fr"){
+	// Removed the french and set global so they are the same size
+	//if(getCookie("language")==="fr"){
 		$('#sidebar').append('<style>@media (min-width: 769px) {#sidebar {min-width: 275px !important; max-width: 275px !important;}}</style>');
-	};
+	//};
 } // End of fixLeftNavFrenchSize
 
 function fixSessionsAccordion () {
