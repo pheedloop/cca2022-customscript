@@ -118,14 +118,6 @@ function fixGroupListings() {
 		$(this).addClass("border-0 text-left");
 		$(this).find('button').each(function() {
 			$(this).replaceWith("<div class='btn btn-light btn-sm font-sz-sm m-0 p-1 px-3 mr-3'>" + $(this).html() + "</div>");
-			// Roch Lambert - While here set the correct language for the live attribute
-			if(getCookie("language")==="fr") {
-				$(this).contents().filter(function() {
-					return this.nodeType == 3
-				}).each(function(){
-					this.textContent = this.textContent.replace('Live','En direct');
-				});				
-			};
 		});
    		// Convert the divs to buttons
 		divToButton(this);
@@ -142,6 +134,22 @@ function fixGroupListings() {
 			}, 2000);
 		});
 	});
+	
+	// Roch Lambert - Need delay to fix translation in french when clicking on the groups button
+	if(getCookie("language")==="fr") {
+		$('div#attendees-container>li.nav-item>a.nav-tab-network-groups').click(function () {
+			setTimeout (function () {
+				// Roch Lambert - Set the correct language
+				$('div#network-groups-list>div.d-flex>div.btn').each(function () {
+					$(this).contents().filter(function() {
+						return this.nodeType == 3
+					}).each(function(){
+						this.textContent = this.textContent.replace('Live','En direct');
+					});
+				});
+			}, 2000);
+		});
+	};
 } // End of fixGroupListings
 
 function fixPeopleListings() {
@@ -729,7 +737,7 @@ function fixLoginDateTranslation () {
 function fixLeftNavFrenchSize () {
 	// Roch Lambert - Add fix for french navbar
 	if(getCookie("language")==="fr"){
-		$('#sidebar').append('<style>@media (min-width: 769px) {#sidebar {min-width: 250px !important; max-width: 250px !important;}}</style>');
+		$('#sidebar').append('<style>@media (min-width: 769px) {#sidebar {min-width: 300px !important; max-width: 300px !important;}}</style>');
 	};
 } // End of fixLeftNavFrenchSize
 
