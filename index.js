@@ -788,4 +788,3 @@ function fixSocialMediaButtonNetworking () {
 		$(this).replaceWith("<span class='btn btn-primary px-3 py-2'>" + $(this).html() + "</span>");
 	});
 } // End of fixSocialMediaButtonNetworking
->>>>>>> master
