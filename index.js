@@ -25,7 +25,6 @@
 	});
 });
 
-
 function letErRip () {
 	// Set timeout and ensure page is ready for a11y fixes
 	setTimeout(function() {
@@ -106,17 +105,26 @@ function fixSessionsPage() {
 
 function fixCareerFairPage() {
 	fixChatWhiteSpaceCareerFairShowcase();
+	fixSocialMediaButtonCareerFairShowcase();
 } // End of fixCareerFairPage
 
 function fixShowcasePage() {
 	fixChatWhiteSpaceCareerFairShowcase();
+	fixSocialMediaButtonCareerFairShowcase();
 } // End of fixShowcasePage
 
 function fixNetworkingPage() {
 	fixChatWhiteSpaceNetworking();
 	fixPeopleListings();
 	fixGroupListings();
+	fixSocialMediaButtonNetworking();
 } // End of fixNetworkingPage
+
+function fixAccountPage() {
+	fixAccountHeadings();
+	fixAccountForm();
+	fixSpeakerBio();
+} // End of fixAccountPage
 
 function fixGroupListings() {
 	$('div#network-groups-list>div.group-item').each(function() {
@@ -126,7 +134,6 @@ function fixGroupListings() {
 		});
    		// Convert the divs to buttons
 		divToButton(this);
-  
 	});
 
 	// Andrew Nordlund - for some reason I couldn't just attach a new click handler above.  It would get lost upon converting to <button>.  Even if I already converted to button.  This was the only way I could get it to work:  first convert the divs to buttons.  Then add click handlers to those buttons.
@@ -136,11 +143,26 @@ function fixGroupListings() {
 				// Networking section - Groups - expanding the content area to full width
 				$("div#group-container").attr("class", "col-xl-12 scroll-fader");
 				fixNetworkingHeadings();
-				fixNetworkDeviceTranslations();
-				
+				fixNetworkDeviceTranslations();	
 			}, 2000);
 		});
 	});
+	
+	// Roch Lambert - Need delay to fix translation in french when clicking on the groups button
+	if(getCookie("language")==="fr") {
+		$('div.attendees-container>ul>li.nav-item>a#nav-tab-network-groups').click(function () {
+			setTimeout (function () {
+				// Roch Lambert - Set the correct language
+				$('div#network-groups-list').find('div.d-flex>div.btn').each(function () {
+					$(this).contents().filter(function() {
+						return this.nodeType == 3
+					}).each(function(){
+						this.textContent = this.textContent.replace('Live','En direct');
+					});
+				});
+			}, 2000);
+		});
+	};
 } // End of fixGroupListings
 
 function fixPeopleListings() {
@@ -148,7 +170,6 @@ function fixPeopleListings() {
 	$('div#items-list div.item').each(function() {
 		$(this).addClass("border-0 text-left");
    		divToButton(this);
-  
 	});
 
 	// Andrew Nordlund - for some reason I couldn't just attach a new click handler above.  It would get lost upon converting to <button>.  Even if I already converted to button.  This was the only way I could get it to work:  first convert the divs to buttons.  Then add click handlers to those buttons.
@@ -192,12 +213,7 @@ function divToButtonOld (div) {
 		NewElement += ' ' + attrib.name + '="' + attrib.value + '"';
 	});
 	div.replaceWith(NewElement + ">"+ $(this).html() + "</button>");
-} // End of divToButton
-
-function fixAccountPage() {
-	fixAccountHeadings();
-	fixAccountForm();
-} // End of fixAccountPage
+} // End of divToButtonOld
 
 function fixLangSwitcher() {
 	// Roch Lambert - Add lang attributes to the language switcher:
@@ -691,12 +707,14 @@ function fixGlobalNavHeadings() {
 } // End of fixGlobalNavHeadings
 
 function fixSpeakerBioWall() {
+	$('#speakers').find('div.card-body').find('ul.list-unstyled>div.mt-1').each(function () {
 		// Let's split the paragraphs for the bio's in two because it's long!
-		var text = $('#speakers>div.card-body>ul.list-unstyled>div.mt-1>p').text();
+		var text = $(this).find('p').text();
 		var tokens = text.split('. ');
 		var n = Math.floor(tokens.length/2);
 		var htmltext = '<p>'+tokens.slice(0, n).join('.') + '.</p><p>' + tokens.slice(n+1, tokens.length).join('.') + '</p>';
-		$('#speakers>div.card-body>ul.list-unstyled>div.mt-1>p').html(htmltext);
+		$(this).find('p').html(htmltext);
+	});
 } // End of fixSpeakerBioWall
 
 function setCurrentPage () {
@@ -733,12 +751,41 @@ function fixLoginDateTranslation () {
 
 function fixLeftNavFrenchSize () {
 	// Roch Lambert - Add fix for french navbar
-	if(getCookie("language")==="fr"){
-		$('#sidebar').append('<style>@media (min-width: 769px) {#sidebar {min-width: 250px !important; max-width: 250px !important;}}</style>');
-	};
+	// Removed the french and set global so they are the same size
+	//if(getCookie("language")==="fr"){
+		$('#sidebar').append('<style>@media (min-width: 769px) {#sidebar {min-width: 275px !important; max-width: 275px !important;}}</style>');
+	//};
 } // End of fixLeftNavFrenchSize
 
 function fixSessionsAccordion () {
 	// Roch Lambert - Find accordion and remove class to prevent accordion
 	$('#session-accordion').find('div.card-header').removeAttr("data-toggle data-target aria-expanded");
 } // End of fixSessionsAccordion
+
+function fixSpeakerBio () {
+	// Roch Lambert - Loop through all the speaker tags
+	$('.attendee-tags').find('span.px-3').each(function () {
+		// Grab the text
+		var text = $(this).text();
+		// Now check if contains "Speaker"
+		if ($(this).is(':contains("Speaker")')) {
+			// Found speaker so set textarea bio to read-only
+			$("div.form-group").find('textarea[name="about"]').prop('readonly', true);
+		};
+	});
+} // End of fixSpeakerBio
+
+function fixSocialMediaButtonCareerFairShowcase () {
+	// Roch Lambert - There is a double tab on a social media because of a/button, let's remove the button
+	$('#exhibitor-container').find('div.btn-group>a>button').each(function () {
+		$(this).replaceWith("<span class='btn btn-primary px-3 py-2'>" + $(this).html() + "</span>");
+	});
+} // End of fixSocialMediaButtonCareerFairShowcase
+
+function fixSocialMediaButtonNetworking () {
+	// Roch Lambert - There is a double tab on a social media because of a/button, let's remove the button
+	$('#attendee-container').find('div.btn-group>a>button').each(function () {
+		$(this).replaceWith("<span class='btn btn-primary px-3 py-2'>" + $(this).html() + "</span>");
+	});
+} // End of fixSocialMediaButtonNetworking
+>>>>>>> master
