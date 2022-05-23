@@ -120,7 +120,11 @@ function fixGroupListings() {
 			$(this).replaceWith("<div class='btn btn-light btn-sm font-sz-sm m-0 p-1 px-3 mr-3'>" + $(this).html() + "</div>");
 			// Roch Lambert - While here set the correct language for the live attribute
 			if(getCookie("language")==="fr") {
-				$(this).text('En direct');
+				$(this).contents().filter(function() {
+					return this.nodeType == 3
+				}).each(function(){
+					this.textContent = this.textContent.replace('Live','En direct');
+				});				
 			};
 		});
    		// Convert the divs to buttons
