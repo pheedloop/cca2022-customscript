@@ -56,6 +56,7 @@ function fixAllPages () {
 
 function fixLoginPage() {
 	fixRequestPasswordModal();	
+	fixLoginDateTranslation();
 } // End of fixLoginPage
 
 function fixLobbyPage() {
@@ -578,8 +579,8 @@ function fixGlobalNavHeadings() {
 			$('#header').find('div.mr-4').prepend('<h2 class="wb-inv" id="langMenuH2">Sélection de la langue et outils</h2>');
 		} else {
 			$('#header').find('div.mr-4').prepend('<h2 class="wb-inv" id="langMenuH2">Language selection and tools</h2>');
-		}
-	}
+		};
+	};
 } // End of fixGlobalNavHeadings
 
 function fixSpeakerBioWall() {
@@ -615,3 +616,10 @@ function fixLeftNavIconFrench () {
 	// Find french program link in sidebar and change class
 	$("#sidebar").find('i.fa-video').attr('class', 'fas fa-calendar-check icon');
 } // End of fixLeftNavIconFrench
+
+function fixLoginDateTranslation () {
+	// Find french date on the login page and translate
+	if(getCookie("language")==="fr") {
+		$("#login-form-container").find('div.text-secondary').text('26 mai 2022 - 27 mai 2022');
+	};
+} // End of fixLoginDateTranslation
