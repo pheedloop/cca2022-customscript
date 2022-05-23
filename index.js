@@ -103,6 +103,7 @@ function fixShowcasePage() {
 } // End of fixShowcasePage
 
 function fixNetworkingPage() {
+	fixChatWhiteSpaceNetworking();
 	fixPeopleListings();
 	fixGroupListings();
 } // End of fixNetworkingPage
@@ -144,16 +145,23 @@ function fixPeopleListings() {
 	
 	$('div#items-list button.item').each(function() {
 		$(this).click(function () {
-			// Check for swal
-			$('div.swal-overlay--show-modal').each(function() {
-				fixWannaLeaveModal();
-				$('div.swal-overlay>div.swal-modal button.swal-button.swal-button--confirm').click(function() {
-					setTimeout (function () {
-						fixChatWhiteSpaceNetworking ();
-						fixNetworkingNewContent();
-					}, 2000);
-				});
-			});
+			// Check for swal.  hmm, it's not finding it.  Maybe if I delayed it for a bit.
+			setTimeout (function() {
+				if ($('div.swal-overlay--show-modal')[0]) {
+					$('div.swal-overlay--show-modal').each(function() {
+						fixWannaLeaveModal();
+						$('div.swal-overlay>div.swal-modal button.swal-button.swal-button--confirm').click(function() {
+							setTimeout (function () {
+								fixChatWhiteSpaceNetworking ();
+								fixNetworkingNewContent();
+							}, 2000);
+						});
+					});
+				} else {
+					fixChatWhiteSpaceNetworking ();
+					fixNetworkingNewContent();
+				}
+			}, 500);
 		});
 	});
 	
