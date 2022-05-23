@@ -134,24 +134,6 @@ function fixGroupListings() {
 			}, 2000);
 		});
 	});
-	
-	// Roch Lambert - Need delay to fix translation in french when clicking on the groups button
-	if(getCookie("language")==="fr") {
-		$('div.attendees-container>li.nav-item>a#nav-tab-network-groups') {
-			$(this).click(function () {
-				setTimeout (function () {
-					// Roch Lambert - Set the correct language
-					$('div#network-groups-list>div.d-flex>div.btn').each(function () {
-						$(this).contents().filter(function() {
-							return this.nodeType == 3
-						}).each(function(){
-							this.textContent = this.textContent.replace('Live','En direct');
-						});
-					});
-				}, 2000);
-			});
-		};
-	};
 } // End of fixGroupListings
 
 function fixPeopleListings() {
