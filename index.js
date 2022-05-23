@@ -165,7 +165,7 @@ function divToButton (div) {
 } // End of divToButton
 
 // Don't use.  Don't delete yet.  Maybe delete later.  Don't use.
-function divToButton-old (div) {
+function divToButtonOld (div) {
 	let NewElement = "<button";
 	$.each(div.attributes, function(i, attrib) {
 		NewElement += ' ' + attrib.name + '="' + attrib.value + '"';
