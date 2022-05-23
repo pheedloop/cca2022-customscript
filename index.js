@@ -95,16 +95,19 @@ function fixSessionsPage() {
 
 function fixCareerFairPage() {
 	fixChatWhiteSpaceCareerFairShowcase();
+	fixSocialMediaButtonCareerFairShowcase();
 } // End of fixCareerFairPage
 
 function fixShowcasePage() {
 	fixChatWhiteSpaceCareerFairShowcase();
+	fixSocialMediaButtonCareerFairShowcase();
 } // End of fixShowcasePage
 
 function fixNetworkingPage() {
 	fixChatWhiteSpaceNetworking();
 	fixPeopleListings();
 	fixGroupListings();
+	fixSocialMediaButtonNetworking();
 } // End of fixNetworkingPage
 
 function fixAccountPage() {
@@ -758,3 +761,17 @@ function fixSpeakerBio () {
 		};
 	});
 } // End of fixSpeakerBio
+
+function fixSocialMediaButtonCareerFairShowcase () {
+	// Roch Lambert - There is a double tab on a social media because of a/button, let's remove the button
+	$('#exhibitor-container').find('div.btn-group>a>button').each(function () {
+		$(this).replaceWith("<span class='btn btn-primary px-3 py-2'>" + $(this).html() + "</span>");
+	});
+} // End of fixSocialMediaButtonCareerFairShowcase
+
+function fixSocialMediaButtonNetworking () {
+	// Roch Lambert - There is a double tab on a social media because of a/button, let's remove the button
+	$('#attendee-container').find('div.btn-group>a>button').each(function () {
+		$(this).replaceWith("<span class='btn btn-primary px-3 py-2'>" + $(this).html() + "</span>");
+	});
+} // End of fixSocialMediaButtonNetworking
