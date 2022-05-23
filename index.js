@@ -99,11 +99,77 @@ function fixShowcasePage() {
 } // End of fixShowcasePage
 
 function fixNetworkingPage() {
-	fixChatWhiteSpaceNetworking();
-	fixNetworkDeviceTranslations();
-	fixNetworkingHeadings();
-	fixNetworkingNewContent();
+	fixPeopleListings();
+	fixGroupListings();
 } // End of fixNetworkingPage
+
+function fixGroupListings() {
+	$('div#network-groups-list>div.group-item').each(function() {
+		$(this).addClass("border-0 text-left");
+		$(this).find('button').each(function() {
+			$(this).replaceWith("<div class='btn btn-light btn-sm font-sz-sm m-0 p-1 px-3 mr-3'>" + $(this).html() + "</div>");
+		});
+   		// Convert the divs to buttons
+		divToButton(this);
+  
+	});
+
+	// Andrew Nordlund - for some reason I couldn't just attach a new click handler above.  It would get lost upon converting to <button>.  Even if I already converted to button.  This was the only way I could get it to work:  first convert the divs to buttons.  Then add click handlers to those buttons.
+	$('div#network-groups-list>button.group-item').each(function() {
+		$(this).click(function () {
+			setTimeout (function () {
+				// Networking section - Groups - expanding the content area to full width
+				$("div#group-container").attr("class", "col-xl-12 scroll-fader");
+				fixNetworkDeviceTranslations();
+				fixNetworkingHeadings();
+				fixNetworkingNewContent();
+			}, 2000);
+		});
+	});
+} // End of fixGroupListings
+
+function fixPeopleListings() {
+	// First set all those divs to buttons
+	$('div#item-list div.item').each(function() {
+		$(this).addClass("border-0 text-left");
+   		divToButton(this);
+  
+	});
+
+	// Andrew Nordlund - for some reason I couldn't just attach a new click handler above.  It would get lost upon converting to <button>.  Even if I already converted to button.  This was the only way I could get it to work:  first convert the divs to buttons.  Then add click handlers to those buttons.
+	
+	$('div#item-list button.item').each(function() {
+		$(this).click(function () {
+			// Check for swal
+			$('div.swal-overlay--show-modal').each(function() {
+				fixWannaLeaveModal();
+				$('div.swal-overlay>div.swal-modal button.swal-button.swal-button--confirm').click(function() {
+					setTimeout (function () {
+						fixChatWhiteSpaceNetworking ();
+					}, 2000);
+				});
+			});
+		});
+	});
+	
+} // End of fixPeopleListings
+
+function divToButton (div) {
+	let NewElement = "<button";
+	$.each(div.attributes, function(i, attrib) {
+		NewElement += ' ' + attrib.name + '="' + attrib.value + '"';
+	});
+	$(div).replaceWith(NewElement + ">" + $(div).html() + "</button>");
+} // End of divToButton
+
+// Don't use.  Don't delete yet.  Maybe delete later.  Don't use.
+function divToButton-old (div) {
+	let NewElement = "<button";
+	$.each(div.attributes, function(i, attrib) {
+		NewElement += ' ' + attrib.name + '="' + attrib.value + '"';
+	});
+	div.replaceWith(NewElement + ">"+ $(this).html() + "</button>");
+} // End of divToButton
 
 function fixAccountPage() {
 	fixAccountHeadings();
@@ -200,8 +266,7 @@ function fixChatWhiteSpaceNetworking () {
 	// Fix the chat bug with the extra whitespace
 	// Networking section - expanding the content area to full width
 	$("div#attendee-container").attr("class", "col-xl-12 scroll-fader");
-	// Networking section - Groups - expanding the content area to full width
-	$("div#group-container").attr("class", "col-xl-12 scroll-fader");
+	
 } // End of fixChatWhiteSpaceNetworking
 
 function fixProfilePicAlt () {
