@@ -138,7 +138,7 @@ function fixPeopleListings() {
 
 	// Andrew Nordlund - for some reason I couldn't just attach a new click handler above.  It would get lost upon converting to <button>.  Even if I already converted to button.  This was the only way I could get it to work:  first convert the divs to buttons.  Then add click handlers to those buttons.
 	
-	$('div#item-list button.item').each(function() {
+	$('div#items-list button.item').each(function() {
 		$(this).click(function () {
 			// Check for swal
 			$('div.swal-overlay--show-modal').each(function() {
