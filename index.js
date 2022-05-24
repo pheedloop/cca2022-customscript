@@ -188,7 +188,14 @@ function fixAccountPage() {
 	fixAccountHeadings();
 	fixAccountForm();
 	fixAccountLockOptions();
+	fixSliders();
 } // End of fixAccountPage
+
+function fixSliders() {
+	$('span.switch').click(function(){
+		$(this).find('input:first')[0].click();
+	});
+} // End of fixSliders
 
 function fixGroupFilterSection () {
 	let observer = new MutationObserver(mutationRecords => {
