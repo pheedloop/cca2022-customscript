@@ -41,11 +41,11 @@ function letErRip () {
 		// If on the sessions page:
 		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=sessions/i)) {setupChannelsPageFixes(); fixChannelsPage();} // English schedule
 		// If on the career fair page:
-		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=exhibitors/i)) fixCareerFairPage();
+		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=exhibitors/i)) {setupCareerFairPageFixes(); fixCareerFairPage();}
 		// If on the showcase page:
-		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=showcase/i)) fixShowcasePage();
+		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=showcase/i)) {setupShowcasePageFixes(); fixShowcasePage();}
 		// If on the networking page:
-		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=attendees/i)) fixNetworkingPage();
+		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=attendees/i)) {setupNetworkingPageFixes(); fixNetworkingPage();}
 		// If on the account page:
 		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=settings/i)) fixAccountPage();
 	}, 5000);
@@ -78,6 +78,9 @@ function fixLobbyPage() {
 } // End of fixLobbyPage
 
 function setupChannelsPageFixes () {
+	// whenever someone clicks on a session, then the fixes to this page have to be applied.  But they can't be applied
+	// right away because not everything is loaded.  So, after they click, wait a second (maybe too much?) and then
+	// run through all the fixes.
 	$('div.session-selector').click(function() {
 		setTimeout (function() {
   			fixChannelsPage();
@@ -95,6 +98,7 @@ function fixChannelsPage() {
 	fixSessionsAccordion();
 } // End of fixChannelsPage
 
+// Tnis is exactly the same as Channels page....why are there two?
 function fixSessionsPage() {
 	fixChatWhiteSpaceChannelsSessions();
 	fixSessionsFrenchTranslations();
@@ -103,21 +107,79 @@ function fixSessionsPage() {
 	fixSessionsAccordion();
 } // End of fixSessionsPage
 
+function setupCareerFairFixes () {
+	// Whenever someone clicks on a new exhibitor block, we need to apply fixes...but it's more complicated than Avril Lavign's ex-boyfriend's situations.
+	// If they're just looking at the exhibitor's profile, then go ahead and show them the destination exhibitor's profile.  BUT if they're
+	// in a live session, they'll get a "Are you sure you wanna leave this live sesh?"  If they click "No", then forgedaboudit.  If they
+	// click "Yes", then at _that_ point, wait a second, or two?  Let's make it two, and _then_ apply the fixes.
+	//
+	// Not yet tested
+	$('div#items-list>div.item').click(function() {
+		setTimeout (function() {
+			if ($('div.swal-overlay--show-modal')[0]) {
+					$('div.swal-overlay--show-modal').each(function() {
+						fixWannaLeaveModal();
+						$('div.swal-overlay>div.swal-modal button.swal-button.swal-button--confirm').click(function() {
+							setTimeout (function () {
+					  			fixCareerFairPage();
+							}, 2000);
+						});
+					});
+			} else {
+				fixCareerFairPage();
+			}
+		}, 2000);
+	});
+} // End of setupCareerFairPageFixes
+
+
 function fixCareerFairPage() {
 	fixChatWhiteSpaceCareerFairShowcase();
 	fixSocialMediaButtonCareerFairShowcase();
 } // End of fixCareerFairPage
+
+
+function setupShowcasePageFixes () {
+	// Whenever someone clicks on a new showcase block, the showcase block appears on the right without our
+	// fixes applied.  But they don't show up right away.  So wait a sec, then apply fixes.
+	// This one should be easy-peasy.  Networking and Career Fair should be harder.
+	// Not yet tested
+	$('div#items-list>div.item').click(function() {
+		setTimeout (function() {
+  			fixShowcasePage();
+		}, 1000);
+	});
+} // End of setupShowcasePageFixes
 
 function fixShowcasePage() {
 	fixChatWhiteSpaceCareerFairShowcase();
 	fixSocialMediaButtonCareerFairShowcase();
 } // End of fixShowcasePage
 
+function setupNetworkingPageFixes () {
+	// Of Career Fair, Showcase, and Networking, this should be the hardest, even more complexer than the other's.  I really should have left the Avril
+	// Lavign comment until this one.  Networking has two parts:  People and Groups.
+	// Whenever someone clicks on a person or sesh, the fixes have to be applied
+	//
+	// Okay, Part of the page correction is to turn the divs into buttons...maybe we don't need anything here....
+	// Okay...as it is:
+	// person -> person works
+	// person -> group: works
+	// group -> group: works
+	// group -> person: works.  Oh okay....maybe we don't actually need to fix this,,,,
+	$('div#items-list>div>div.item').click(function() {
+		setTimeout (function() {
+  			fixNetworkingPage();
+		}, 1000);
+	});
+} // End of setupNetworkingPageFixes
+
 function fixNetworkingPage() {
 	fixChatWhiteSpaceNetworking();
 	fixPeopleListings();
 	fixGroupListings();
 	fixSocialMediaButtonNetworking();
+	fixGroupFilterSection();
 } // End of fixNetworkingPage
 
 function fixAccountPage() {
@@ -125,6 +187,100 @@ function fixAccountPage() {
 	fixAccountForm();
 	fixAccountLockOptions();
 } // End of fixAccountPage
+
+function fixGroupFilterSection () {
+	let observer = new MutationObserver(mutationRecords => {
+		//console.log ("There's a mutation!");
+		for (let mutation of mutationRecords) {
+			//console.log ("Mutation type: " + mutation.type);
+			if (mutation.type === 'childList') {
+				fixAttendees();
+				fixExhibitors ()
+			}
+		}
+	});
+	// Watch for changes in online participants, which are listed in a different area than the rest
+	let nd = $('div.attendees-list-online')[0];
+	observer.observe(nd, {childList : true, subtree : true});
+	
+	// Watch for changes in the list of exhibitors, speakers, etc.
+	let nd2 = $('div#items-list>div')[0];
+	observer.observe(nd2, {childList : true, subtree : true});
+
+	// Now watch the Filters list for a click.
+	// But before you can do that, you need to watch the filters button for a click
+	// Add class an-mod so you don't repeatedly add hundreds of click listeners
+	$('#items-filter button.btn.dropdown-toggle').click(function () {
+		if ($(this).hasClass ("an-mod")) {
+			// do nothing for now
+			//console.log ("Looks live I've already modified it.");
+		} else {
+			//console.log ("Looks like it's not been modified.  Do it now.");
+			$(this).addClass("an-mod");
+			setTimeout(function(){
+    				$('#items-filter ul.dropdown-menu>li>a').click(function() {
+				      	setTimeout (function() {
+      						//console.log ("Fixing group listings....");
+						fixChatWhiteSpaceNetworking();
+			        		fixAttendees();
+	        				fixExhibitors ();
+						fixSocialMediaButtonNetworking();
+						fixGroupFilterSection();
+				    	  }, 500);
+			  	  });
+			}, 500);
+		  }
+	});
+} // End of fixGroupFilterSection
+
+// fixExhibitors is to fix the list of people (except Online Now) from the filter drop-down on the Networking page
+function fixExhibitors () {
+	$('div#items-list>div[aria-liave=polite]').removeAttr("aria-live");	// This should prolly go elsewhere too
+	$('div#items-list>div>div.item').each(function() {
+		$(this).addClass("border-0 text-left");
+		divToButton(this);
+		$(this).click(function () {
+			setTimeout (function () {
+				// Networking section - Groups - expanding the content area to full width
+				$("div#group-container").attr("class", "col-xl-12 scroll-fader");
+			  	$("div#attendee-container").attr("class", "col-xl-12 scroll-fader");	// Experimental....will it work?
+				fixChatWhiteSpaceNetworking();
+				fixNetworkingHeadings();
+				fixNetworkDeviceTranslations();
+		        	fixSocialMediaButtonNetworking();
+        			fixNetworkingPage();
+			}, 2000);
+		});
+	});
+} // End of fixExhibitors
+
+// fixAttendees is to fix the list of attendees that shows up whenever "Online now" is selected in the filter on the Networking page
+function fixAttendees() {
+	$('div#items-list>div[aria-liave=polite]').removeAttr("aria-live");
+	$('div.attendees-list-online>div.item').each(function() {
+		$(this).addClass("border-0 text-left");
+		divToButton(this);
+    
+		$(this).click(function () {
+			setTimeout (function () {
+				// Networking section - Groups - expanding the content area to full width
+				$("div#group-container").attr("class", "col-xl-12 scroll-fader");
+				$("div#attendee-container").attr("class", "col-xl-12 scroll-fader");	// Experimental....will it work?
+        
+				fixChatWhiteSpaceNetworking();
+				fixNetworkingHeadings();
+				fixNetworkDeviceTranslations();
+		        	fixSocialMediaButtonNetworking();
+        			fixNetworkingPage();
+			}, 2000);
+		});
+	});
+} // End of fixAttendees
+
+
+
+
+
 
 function fixGroupListings() {
 	$('div#network-groups-list>div.group-item').each(function() {
@@ -732,9 +888,8 @@ function fixSessionsAddIcon () {
 	$('.sessions-container').find('div.session-selector').each(function () {
 		// Get value of the ID of the session
 		var sid = $(this).find("div.title>i").attr("id");
-		var sid2 = sid.replace('schedule-add-icon-','');
-		$(this).find('div.title>span').attr("id", sid2 + '-title');
-		$(this).find("div.title>i").attr("aria-labelledby", sid2 + '-title');
+		$(this).find('div.title>span').attr("id", sid + '-title');
+		$(this).find("div.title>i").attr("aria-labelledby", sid + '-title');
 	});
 } // End of fixSessionsAddIcon
 
