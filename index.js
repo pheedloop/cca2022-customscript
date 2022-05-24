@@ -184,7 +184,7 @@ function fixNetworkingPage() {
 function fixAccountPage() {
 	fixAccountHeadings();
 	fixAccountForm();
-	fixSpeakerBio();
+	fixAccountLockOptions();
 } // End of fixAccountPage
 
 function fixGroupListings() {
@@ -823,23 +823,27 @@ function fixSessionsAccordion () {
 	$('#session-accordion').find('div.card-header').removeAttr("data-toggle data-target aria-expanded");
 } // End of fixSessionsAccordion
 
-function fixSpeakerBio () {
+function fixAccountLockOptions () {
 	// Roch Lambert - Loop through all the speaker tags
 	$('.attendee-tags').find('span.px-3').each(function () {
-		// Grab the text
-		var text = $(this).text();
 		// Now check if contains "Speaker"
 		if ($(this).is(':contains("Speaker")')) {
-			// Found speaker so set textarea bio to read-only
+			// Found speaker so set certain inputs to read-only
 			$("div.form-group").find('textarea[name="about"]').prop('readonly', true);
+			$("div.form-group").find('input[name="organization"]').prop('readonly', true);
+			$("div.form-group").find('input[name="title"]').prop('readonly', true);
 		};
 	});
-} // End of fixSpeakerBio
+} // End of fixAccountLockOptions
 
 function fixSocialMediaButtonCareerFairShowcase () {
 	// Roch Lambert - There is a double tab on a social media because of a/button, let's remove the button
 	$('#exhibitor-container').find('div.btn-group>a>button').each(function () {
 		$(this).replaceWith("<span class='btn btn-primary px-3 py-2'>" + $(this).html() + "</span>");
+	});
+	// Roch Lambert - Set proper attributes on external links
+	$('#exhibitor-container').find('div.btn-group>a').each(function () {
+		$(this).attr("rel", "noopener noreferrer");
 	});
 } // End of fixSocialMediaButtonCareerFairShowcase
 
@@ -847,5 +851,9 @@ function fixSocialMediaButtonNetworking () {
 	// Roch Lambert - There is a double tab on a social media because of a/button, let's remove the button
 	$('#attendee-container').find('div.btn-group>a>button').each(function () {
 		$(this).replaceWith("<span class='btn btn-primary px-3 py-2'>" + $(this).html() + "</span>");
+	});
+	// Roch Lambert - Set proper attributes on external links
+	$('#attendee-container').find('div.btn-group>a').each(function () {
+		$(this).attr("rel", "noopener noreferrer");
 	});
 } // End of fixSocialMediaButtonNetworking
