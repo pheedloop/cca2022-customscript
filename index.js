@@ -41,11 +41,11 @@ function letErRip () {
 		// If on the sessions page:
 		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=sessions/i)) {setupChannelsPageFixes(); fixChannelsPage();} // English schedule
 		// If on the career fair page:
-		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=exhibitors/i)) fixCareerFairPage();
+		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=exhibitors/i)) {setupCareerFairPageFixes(); fixCareerFairPage();}
 		// If on the showcase page:
-		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=showcase/i)) fixShowcasePage();
+		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=showcase/i)) {setupShowcasePageFixes(); fixShowcasePage();}
 		// If on the networking page:
-		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=attendees/i)) fixNetworkingPage();
+		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=attendees/i)) {setupNetworkingPageFixes(); fixNetworkingPage();}
 		// If on the account page:
 		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=settings/i)) fixAccountPage();
 	}, 5000);
@@ -78,6 +78,7 @@ function fixLobbyPage() {
 } // End of fixLobbyPage
 
 function setupChannelsPageFixes () {
+	// Note: gotsta do this for Networking, Showcase, and Career Fair
 	$('div.session-selector').click(function() {
 		setTimeout (function() {
   			fixChannelsPage();
@@ -95,6 +96,7 @@ function fixChannelsPage() {
 	fixSessionsAccordion();
 } // End of fixChannelsPage
 
+// Tnis is exactly the same as Channels page....why are there two?
 function fixSessionsPage() {
 	fixChatWhiteSpaceChannelsSessions();
 	fixSessionsFrenchTranslations();
@@ -103,15 +105,43 @@ function fixSessionsPage() {
 	fixSessionsAccordion();
 } // End of fixSessionsPage
 
+function setupCareerFairFixes () {
+	// Note: gotsta do this for Networking, Showcase, and Career Fair
+	$('div.session-selector').click(function() {
+		setTimeout (function() {
+  			fixChannelsPage();
+		}, 1000);
+	});
+} // End of setupCareerFairPageFixes
+
 function fixCareerFairPage() {
 	fixChatWhiteSpaceCareerFairShowcase();
 	fixSocialMediaButtonCareerFairShowcase();
 } // End of fixCareerFairPage
 
+
+function setupShowcasePageFixes () {
+	// Note: gotsta do this for Networking, Showcase, and Career Fair
+	$('div#items-list>div.session-selector').click(function() {
+		setTimeout (function() {
+  			fixShowcasePage();
+		}, 1000);
+	});
+} // End of setupShowcasePageFixes
+
 function fixShowcasePage() {
 	fixChatWhiteSpaceCareerFairShowcase();
 	fixSocialMediaButtonCareerFairShowcase();
 } // End of fixShowcasePage
+
+function setupNetworkingPageFixes () {
+	// Note: gotsta do this for x Showcase, and Career Fair
+	$('div.session-selector').click(function() {
+		setTimeout (function() {
+  			fixNetworkingPage();
+		}, 1000);
+	});
+} // End of setupChannelsPageFixes
 
 function fixNetworkingPage() {
 	fixChatWhiteSpaceNetworking();
