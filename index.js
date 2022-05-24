@@ -195,6 +195,9 @@ function fixSliders() {
 	$('span.switch').click(function(){
 		$(this).find('input:first')[0].click();
 	});
+	$('span.switch').keyup(function(e){
+		if (e.key == " " || e.code == "Space" || e.keyCode == 32) $(this).find('input:first')[0].click();
+	});
 } // End of fixSliders
 
 function fixGroupFilterSection () {
