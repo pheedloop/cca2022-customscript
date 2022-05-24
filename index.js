@@ -78,7 +78,9 @@ function fixLobbyPage() {
 } // End of fixLobbyPage
 
 function setupChannelsPageFixes () {
-	// Note: gotsta do this for Networking, Showcase, and Career Fair
+	// whenever someone clicks on a session, then the fixes to this page have to be applied.  But they can't be applied
+	// right away because not everything is loaded.  So, after they click, wait a second (maybe too much?) and then
+	// run through all the fixes.
 	$('div.session-selector').click(function() {
 		setTimeout (function() {
   			fixChannelsPage();
@@ -106,13 +108,30 @@ function fixSessionsPage() {
 } // End of fixSessionsPage
 
 function setupCareerFairFixes () {
-	// Note: gotsta do this for Networking, Showcase, and Career Fair
-	$('div.session-selector').click(function() {
+	// Whenever someone clicks on a new exhibitor block, we need to apply fixes...but it's more complicated than Avril Lavign's ex-boyfriend's situations.
+	// If they're just looking at the exhibitor's profile, then go ahead and show them the destination exhibitor's profile.  BUT if they're
+	// in a live session, they'll get a "Are you sure you wanna leave this live sesh?"  If they click "No", then forgedaboudit.  If they
+	// click "Yes", then at _that_ point, wait a second, or two?  Let's make it two, and _then_ apply the fixes.
+	//
+	// Not yet tested
+	$('div#items-list>div.item').click(function() {
 		setTimeout (function() {
-  			fixChannelsPage();
-		}, 1000);
+			if ($('div.swal-overlay--show-modal')[0]) {
+					$('div.swal-overlay--show-modal').each(function() {
+						fixWannaLeaveModal();
+						$('div.swal-overlay>div.swal-modal button.swal-button.swal-button--confirm').click(function() {
+							setTimeout (function () {
+					  			fixCareerFairPage();
+							}, 2000);
+						});
+					});
+			} else {
+				fixCareerFairPage();
+			}
+		}, 2000);
 	});
 } // End of setupCareerFairPageFixes
+
 
 function fixCareerFairPage() {
 	fixChatWhiteSpaceCareerFairShowcase();
@@ -121,8 +140,11 @@ function fixCareerFairPage() {
 
 
 function setupShowcasePageFixes () {
-	// Note: gotsta do this for Networking, Showcase, and Career Fair
-	$('div#items-list>div.session-selector').click(function() {
+	// Whenever someone clicks on a new showcase block, the showcase block appears on the right without our
+	// fixes applied.  But they don't show up right away.  So wait a sec, then apply fixes.
+	// This one should be easy-peasy.  Networking and Career Fair should be harder.
+	// Not yet tested
+	$('div#items-list>div.item').click(function() {
 		setTimeout (function() {
   			fixShowcasePage();
 		}, 1000);
@@ -135,13 +157,22 @@ function fixShowcasePage() {
 } // End of fixShowcasePage
 
 function setupNetworkingPageFixes () {
-	// Note: gotsta do this for x Showcase, and Career Fair
-	$('div.session-selector').click(function() {
+	// Of Career Fair, Showcase, and Networking, this should be the hardest, even more complexer than the other's.  I really should have left the Avril
+	// Lavign comment until this one.  Networking has two parts:  People and Groups.
+	// Whenever someone clicks on a person or sesh, the fixes have to be applied
+	//
+	// Okay, Part of the page correction is to turn the divs into buttons...maybe we don't need anything here....
+	// Okay...as it is:
+	// person -> person works
+	// person -> group: works
+	// group -> group: works
+	// group -> person: works.  Oh okay....maybe we don't actually need to fix this,,,,
+	$('div#items-list>div>div.item').click(function() {
 		setTimeout (function() {
   			fixNetworkingPage();
 		}, 1000);
 	});
-} // End of setupChannelsPageFixes
+} // End of setupNetworkingPageFixes
 
 function fixNetworkingPage() {
 	fixChatWhiteSpaceNetworking();
@@ -762,9 +793,8 @@ function fixSessionsAddIcon () {
 	$('.sessions-container').find('div.session-selector').each(function () {
 		// Get value of the ID of the session
 		var sid = $(this).find("div.title>i").attr("id");
-		var sid2 = sid.replace('schedule-add-icon-','');
-		$(this).find('div.title>span').attr("id", sid2 + '-title');
-		$(this).find("div.title>i").attr("aria-labelledby", sid2 + '-title');
+		$(this).find('div.title>span').attr("id", sid + '-title');
+		$(this).find("div.title>i").attr("aria-labelledby", sid + '-title');
 	});
 } // End of fixSessionsAddIcon
 
