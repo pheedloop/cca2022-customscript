@@ -96,15 +96,17 @@ function fixChannelsPage() {
 	fixSpeakerBioWall();
 	fixSessionsAddIcon();
 	fixSessionsAccordion();
+	fixSocialMediaButtonSessionSpeakers();
 } // End of fixChannelsPage
 
-// Tnis is exactly the same as Channels page....why are there two?
+// This is exactly the same as Channels page....why are there two?
 function fixSessionsPage() {
 	fixChatWhiteSpaceChannelsSessions();
 	fixSessionsFrenchTranslations();
 	fixSpeakerBioWall();
 	fixSessionsAddIcon();
 	fixSessionsAccordion();
+	fixSocialMediaButtonSessionSpeakers();
 } // End of fixSessionsPage
 
 function setupCareerFairFixes () {
@@ -276,11 +278,6 @@ function fixAttendees() {
 		});
 	});
 } // End of fixAttendees
-
-
-
-
-
 
 function fixGroupListings() {
 	$('div#network-groups-list>div.group-item').each(function() {
@@ -952,3 +949,29 @@ function fixSocialMediaButtonNetworking () {
 		$(this).attr("rel", "noopener noreferrer");
 	});
 } // End of fixSocialMediaButtonNetworking
+
+function fixSocialMediaButtonSessionSpeakers () {
+	// Roch Lambert - Fix the speaker social media icons in the session view
+	// LinkedIn
+	$('#session-container').find('#session-accordion').find('#speakers').find('div.media-body').find('div.d-block>a>i.fa-linkedin').each(function () {
+		$(this).replaceWith("<i class='fab fa-linkedin fa-lg'><span class='wb-inv'>LinkedIn</span></i>");
+	});
+	// Twitter
+	$('#session-container').find('#session-accordion').find('#speakers').find('div.media-body').find('div.d-block>a>i.fa-twitter-square').each(function () {
+		$(this).replaceWith("<i class='fab fa-twitter-square fa-lg'><span class='wb-inv'>Twitter</span></i>");
+	});
+	// External website
+	if(getCookie("language")==="fr"){
+		$('#session-container').find('#session-accordion').find('#speakers').find('div.media-body').find('div.d-block>a>i.fa-external-link-square-alt').each(function () {
+			$(this).replaceWith("<i class='fas fa-external-link-square-alt fa-lg'><span class='wb-inv'>Site web externe</span></i>");
+		});
+	} else {
+		$('#session-container').find('#session-accordion').find('#speakers').find('div.media-body').find('div.d-block>a>i.fa-external-link-square-alt').each(function () {
+			$(this).replaceWith("<i class='fas fa-external-link-square-alt fa-lg'><span class='wb-inv'>External website</span></i>");
+		});
+	};
+	// Add external rel attribute on the links
+	$('#session-container').find('#session-accordion').find('#speakers').find('div.media-body').find('div.d-block>a').each(function () {
+		$(this).attr("rel", "noopener noreferrer");
+	});
+} // End of fixSocialMediaButtonSessionSpeakers
