@@ -792,4 +792,8 @@ function fixSocialMediaButtonNetworking () {
 	$('#attendee-container').find('div.btn-group>a>button').each(function () {
 		$(this).replaceWith("<span class='btn btn-primary px-3 py-2'>" + $(this).html() + "</span>");
 	});
+	// Roch Lambert - Set proper attributes on external links
+	$('#attendee-container').find('div.btn-group>a').each(function () {
+		$(this).attr("rel", "noopener noreferrer");
+	});
 } // End of fixSocialMediaButtonNetworking
