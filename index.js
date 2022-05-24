@@ -179,6 +179,7 @@ function fixNetworkingPage() {
 	fixPeopleListings();
 	fixGroupListings();
 	fixSocialMediaButtonNetworking();
+	fixGroupFilterSection();
 } // End of fixNetworkingPage
 
 function fixAccountPage() {
@@ -186,6 +187,100 @@ function fixAccountPage() {
 	fixAccountForm();
 	fixAccountLockOptions();
 } // End of fixAccountPage
+
+function fixGroupFilterSection () {
+	let observer = new MutationObserver(mutationRecords => {
+		//console.log ("There's a mutation!");
+		for (let mutation of mutationRecords) {
+			//console.log ("Mutation type: " + mutation.type);
+			if (mutation.type === 'childList') {
+				fixAttendees();
+				fixExhibitors ()
+			}
+		}
+	});
+	// Watch for changes in online participants, which are listed in a different area than the rest
+	let nd = $('div.attendees-list-online')[0];
+	observer.observe(nd, {childList : true, subtree : true});
+	
+	// Watch for changes in the list of exhibitors, speakers, etc.
+	let nd2 = $('div#items-list>div')[0];
+	observer.observe(nd2, {childList : true, subtree : true});
+
+	// Now watch the Filters list for a click.
+	// But before you can do that, you need to watch the filters button for a click
+	// Add class an-mod so you don't repeatedly add hundreds of click listeners
+	$('#items-filter button.btn.dropdown-toggle').click(function () {
+		if ($(this).hasClass ("an-mod")) {
+			// do nothing for now
+			//console.log ("Looks live I've already modified it.");
+		} else {
+			//console.log ("Looks like it's not been modified.  Do it now.");
+			$(this).addClass("an-mod");
+			setTimeout(function(){
+    				$('#items-filter ul.dropdown-menu>li>a').click(function() {
+				      	setTimeout (function() {
+      						//console.log ("Fixing group listings....");
+						fixChatWhiteSpaceNetworking();
+			        		fixAttendees();
+	        				fixExhibitors ();
+						fixSocialMediaButtonNetworking();
+						fixGroupFilterSection();
+				    	  }, 500);
+			  	  });
+			}, 500);
+		  }
+	});
+} // End of fixGroupFilterSection
+
+// fixExhibitors is to fix the list of people (except Online Now) from the filter drop-down on the Networking page
+function fixExhibitors () {
+	$('div#items-list>div[aria-liave=polite]').removeAttr("aria-live");	// This should prolly go elsewhere too
+	$('div#items-list>div>div.item').each(function() {
+		$(this).addClass("border-0 text-left");
+		divToButton(this);
+		$(this).click(function () {
+			setTimeout (function () {
+				// Networking section - Groups - expanding the content area to full width
+				$("div#group-container").attr("class", "col-xl-12 scroll-fader");
+			  	$("div#attendee-container").attr("class", "col-xl-12 scroll-fader");	// Experimental....will it work?
+				fixChatWhiteSpaceNetworking();
+				fixNetworkingHeadings();
+				fixNetworkDeviceTranslations();
+		        	fixSocialMediaButtonNetworking();
+        			fixNetworkingPage();
+			}, 2000);
+		});
+	});
+} // End of fixExhibitors
+
+// fixAttendees is to fix the list of attendees that shows up whenever "Online now" is selected in the filter on the Networking page
+function fixAttendees() {
+	$('div#items-list>div[aria-liave=polite]').removeAttr("aria-live");
+	$('div.attendees-list-online>div.item').each(function() {
+		$(this).addClass("border-0 text-left");
+		divToButton(this);
+    
+		$(this).click(function () {
+			setTimeout (function () {
+				// Networking section - Groups - expanding the content area to full width
+				$("div#group-container").attr("class", "col-xl-12 scroll-fader");
+				$("div#attendee-container").attr("class", "col-xl-12 scroll-fader");	// Experimental....will it work?
+        
+				fixChatWhiteSpaceNetworking();
+				fixNetworkingHeadings();
+				fixNetworkDeviceTranslations();
+		        	fixSocialMediaButtonNetworking();
+        			fixNetworkingPage();
+			}, 2000);
+		});
+	});
+} // End of fixAttendees
+
+
+
+
+
 
 function fixGroupListings() {
 	$('div#network-groups-list>div.group-item').each(function() {
