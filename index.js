@@ -426,8 +426,7 @@ function fixLangModal() {
 
 function fixHelpDriftChat() {
 	// Temp change to remove the left navigation button for help
-	$('#sidebar').find('button#virtual-action-help').addClass(".drift-open-chat");
-	$('#sidebar').find('button#virtual-action-help').prop("onclick", null);
+	$('#sidebar').find('button#virtual-action-help').replaceWith('<a class="virtual-action d-block drift-open-chat" href="#"><span class="icon-container"><i class="fas fas fa-info-circleicon"></i></span><span class="ml-2">Help</span></a>');
 } // End of fixHelpDriftChat
 
 function fixNotifications() {
