@@ -962,6 +962,7 @@ function fixSessionsAddIcon () {
 function fixLeftNavIconFrench () {
 	// Find French program / English program links in sidebar and change class to audio icon depending on language
 	if(getCookie("language")==="fr") {
+		$('#sidebar').find('ul.virtual-nav-list').find('li:nth-child(2)').find('i').attr('class', 'fas fa-calendar-check icon');
 		$('#sidebar').find('ul.virtual-nav-list').find('li:nth-child(3)').find('i').attr('class', 'fas fa-headphones icon');
 	} else {
 		$('#sidebar').find('ul.virtual-nav-list').find('li:nth-child(2)').find('i').attr('class', 'fas fa-headphones icon');
