@@ -64,6 +64,7 @@ function fixAllPages () {
 	fixGlobalNavHeadings();
 	fixLeftNavIconFrench();
 	fixLeftNavFrenchSize();
+	fixRemoveHelpLeftNav();
 } // End of fixAllPages
 
 function fixLoginPage() {
@@ -422,6 +423,11 @@ function fixLangModal() {
 	$('#languages-modal>div>div.modal-content>div.modal-header>h5:first-child').replaceWith("<h2 class='h5'>" + $('#languages-modal>div>div.modal-content>div.modal-header>h5:first-child').html() + "</h2>");
 	$('#languages-modal>div>div.modal-content>div.modal-header>button.close').attr("aria-label", "Close");
 } // End of fixLangModal
+
+function fixRemoveHelpLeftNav() {
+	// Temp change to remove the left navigation button for help
+	$('#sidebar').find('button#virtual-action-help').parent().remove();
+} // End of fixRemoveHelpLeftNav
 
 function fixNotifications() {
 	// Andrew Nordlund - Give the Notifications button an accessible name.  Start with the word "Notifications"
@@ -954,8 +960,12 @@ function fixSessionsAddIcon () {
 } // End of fixSessionsAddIcon
 
 function fixLeftNavIconFrench () {
-	// Find french program link in sidebar and change class
-	$("#sidebar").find('i.fa-video').attr('class', 'fas fa-calendar-check icon');
+	// Find French program / English program links in sidebar and change class to audio icon depending on language
+	if(getCookie("language")==="fr") {
+		$(".virtual-nav-list").find('li:nth-child(3)').find('i.fa-video').attr('class', 'fas fa-file-audio icon');
+	} else {
+		$(".virtual-nav-list").find('li:nth-child(2)').find('i.fa-calendar-check').attr('class', 'fas fa-file-audio icon');
+	};
 } // End of fixLeftNavIconFrench
 
 function fixLoginDateTranslation () {
@@ -1044,7 +1054,7 @@ function fixAdda11yNotesSessions () {
 } // End of fixAdda11yNotesSessions
 
 function fixAdda11yNotesChannels () {
-	$('#session-accordion').find('div#description').find('div.desc-notes').append('<div lang="fr"><h2>Notes sur l\'accessibilité :</h2><p><ul><li>Le lecteur vidéo est réglé sur lecture automatique en mode sourdine. Cliquez sur le bouton Activer le son du lecteur vidéo pour le son.</li><li>Si vous avez des difficultés à utiliser le lecteur vidéo avec votre clavier, veuillez suivre les étapes suivantes. Mettez la vidéo en focus et sélectionnez "CTRL + ?" sur votre clavier, ce qui vous montrera les raccourcis clavier qui peuvent être utilisés lorsque la vidéo est en focus. Sélectionnez "CTRL + F" pour masquer à nouveau les raccourcis et les commandes du lecteur vidéo seront désormais visibles. Si vous avez besoin d\'aide, n\'hésitez pas à nous contacter en utilisant l\'icône de clavardage en bas à droite intitulée "Open chat with Ask Alex in the Drift Widget messenger".</li><li>Pour ouvrir le sous-titrage dans un nouveau onglet, accédez à <a href="https://www.streamtext.net/player?event=CARTFRCB">https://www.streamtext.net/player?event=CARTFRCB</a>.</li></p></div><div lang="en"><h2>Accessibility notes</h2><p><ul><li>The video player is set to autoplay on mute. Click the unmute button on the video player for sound.</li><li>If you have any difficulties using the video player with your keyboard then please perform the following steps. Focus the video and select ¿CTRL + ?¿ on your keyboard, this will show you the keyboard shortcuts that can be used when the video is in focus. Select ¿CTRL + F¿ to hide the shortcuts again and the video player controls will now be visible. If you need further help don¿t hesitate to contact us using the chat icon at bottom right labelled as ¿Open chat with Ask Alex in the Drift Widget messenger¿.</li></p></div>');
+	$('#session-accordion').find('div#description').find('div.desc-notes').append('<div lang="fr"><h2>Notes sur l\'accessibilité :</h2><p><ul><li>Le lecteur vidéo est réglé sur lecture automatique en mode sourdine. Cliquez sur le bouton Activer le son du lecteur vidéo pour le son.</li><li>Si vous avez des difficultés à utiliser le lecteur vidéo avec votre clavier, veuillez suivre les étapes suivantes. Mettez la vidéo en focus et sélectionnez "CTRL + ?" sur votre clavier, ce qui vous montrera les raccourcis clavier qui peuvent être utilisés lorsque la vidéo est en focus. Sélectionnez "CTRL + F" pour masquer à nouveau les raccourcis et les commandes du lecteur vidéo seront désormais visibles. Si vous avez besoin d\'aide, n\'hésitez pas à nous contacter en utilisant l\'icône de clavardage en bas à droite intitulée "Open chat with Ask Alex in the Drift Widget messenger".</li><li>Pour ouvrir le sous-titrage dans un nouveau onglet, accédez à <a href="https://www.streamtext.net/player?event=CARTFRCB" target="_blank" rel="noopener noreferrer">https://www.streamtext.net/player?event=CARTFRCB</a>.</li></p></div><div lang="en"><h2>Accessibility notes</h2><p><ul><li>The video player is set to autoplay on mute. Click the unmute button on the video player for sound.</li><li>If you have any difficulties using the video player with your keyboard then please perform the following steps. Focus the video and select “CTRL + ?” on your keyboard, this will show you the keyboard shortcuts that can be used when the video is in focus. Select “CTRL + F” to hide the shortcuts again and the video player controls will now be visible. If you need further help don’t hesitate to contact us using the chat icon at bottom right labelled as “Open chat with Ask Alex in the Drift Widget messenger”.</li><li>To open the subtitles in a new tab, go to <a href="https://www.streamtext.net/player?event=CARTFRCB" target="_blank" rel="noopener noreferrer">https://www.streamtext.net/player?event=CARTFRCB</a>.</li></p></div>');
 } // End of fixAdda11yNotesChannels
 
 function addSkipLinks (dest) {
