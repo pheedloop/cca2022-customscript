@@ -959,8 +959,12 @@ function fixSessionsAddIcon () {
 } // End of fixSessionsAddIcon
 
 function fixLeftNavIconFrench () {
-	// Find french program link in sidebar and change class
-	$("#sidebar").find('i.fa-video').attr('class', 'fas fa-calendar-check icon');
+	// Find French program / English program links in sidebar and change class to audio icon depending on language
+	if(getCookie("language")==="fr") {
+		$(".virtual-nav-list").find('li:nth-child(3)').find('i.fa-video').attr('class', 'fas fa-file-audio icon');
+	} else {
+		$(".virtual-nav-list").find('li:nth-child(2)').find('i.fa-calendar-check').attr('class', 'fas fa-file-audio icon');
+	};
 } // End of fixLeftNavIconFrench
 
 function fixLoginDateTranslation () {
