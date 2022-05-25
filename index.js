@@ -35,19 +35,19 @@ function letErRip () {
 		// If on the login page:
 		if (document.location.pathname == "/CCA2022/login/auth/") fixLoginPage();
 		// If on the lobby page:
-		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=lobby/i)) fixLobbyPage();
+		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=lobby/i)) { fixLobbyPage(); $('h1#annonceH1').focus(); }
 		// If on the channels page:
-		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=channels/i)) {setupChannelsPageFixes(); fixChannelsPage(); /* // This is called in the setup function */} // French schedule
+		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=channels/i)) {setupChannelsPageFixes(); fixChannelsPage(); $('#page').focus();} // French schedule
 		// If on the sessions page:
-		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=sessions/i)) {setupSessionsPageFixes(); fixSessionsPage(); /* // This is called in the setup function */} // English schedule
+		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=sessions/i)) {setupSessionsPageFixes(); fixSessionsPage(); $('#page').focus();} // English schedule
 		// If on the career fair page:
-		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=exhibitors/i)) {setupCareerFairPageFixes(); fixCareerFairPage(); /* // This is called in the setup function */}
+		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=exhibitors/i)) {setupCareerFairPageFixes(); fixCareerFairPage(); $('#page').focus(); }
 		// If on the showcase page:
-		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=showcase/i)) {setupShowcasePageFixes(); fixShowcasePage(); /* // This is called in the setup function */}
+		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=showcase/i)) {setupShowcasePageFixes(); fixShowcasePage();  $('#page').focus(); }
 		// If on the networking page:
-		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=attendees/i)) {setupNetworkingPageFixes(); fixNetworkingPage(); /* // This is called in the setup function */}
+		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=attendees/i)) {setupNetworkingPageFixes(); fixNetworkingPage(); $('#page').focus(); }
 		// If on the account page:
-		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=settings/i)) fixAccountPage();
+		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=settings/i)) { fixAccountPage(); $('#accInfoH1').focus(); }
 	}, 5000);
 } // End of letErRip
 
@@ -75,8 +75,7 @@ function fixLoginPage() {
 function fixLobbyPage() {
 	fixHomeBannerAlt();
 	fixChatWhiteSpaceLobby();
-	fixLobbyHeadings();
-	$('h1#annonceH1').focus();
+	fixLobbyHeadings();	
 } // End of fixLobbyPage
 
 function setupChannelsPageFixes () {
@@ -104,6 +103,7 @@ function setupSessionsPageFixes () {
 function fixChannelsPage() {
 	// Andrew Nordlund - Okay, you need to do this on page load (after clicking a left nav button) _and_ after clicking on an event or speaker's info
 	// in the page.
+	addSkipLinks("#session-container");
 	fixChatWhiteSpaceChannelsSessions();
 	fixSessionsFrenchTranslations();
 	fixSpeakerBioWall();
@@ -115,8 +115,8 @@ function fixChannelsPage() {
 } // End of fixChannelsPage
 
 function fixSessionsPage() {
-	// Andrew Nordlund - Okay, you need to do this on page load (after clicking a left nav button) _and_ after clicking on an event or speaker's info
-	// in the page.
+	// Andrew Nordlund - Okay, you need to do this on page load (after clicking a left nav button) _and_ after clicking on an event or speaker's info in the page.
+	addSkipLinks("#session-container");
 	fixChatWhiteSpaceChannelsSessions();
 	fixSessionsFrenchTranslations();
 	fixSpeakerBioWall();
@@ -156,7 +156,8 @@ function setupCareerFairPageFixes () {
 function fixCareerFairPage() {
 	fixChatWhiteSpaceCareerFairShowcase();
 	fixSocialMediaButtonCareerFairShowcase();
-	$('#items-search').focus();
+	$('div#content>div.row>div.item-container').first().attr("id", "item-container");
+	addSkipLinks("#item-container");
 } // End of fixCareerFairPage
 
 
@@ -175,7 +176,8 @@ function setupShowcasePageFixes () {
 function fixShowcasePage() {
 	fixChatWhiteSpaceCareerFairShowcase();
 	fixSocialMediaButtonCareerFairShowcase();
-	$('#items-search').focus();
+	$('div#content>div.row>div.item-container').first().attr("id", "item-container");
+	addSkipLinks("#item-container");
 } // End of fixShowcasePage
 
 function setupNetworkingPageFixes () {
@@ -192,7 +194,6 @@ function setupNetworkingPageFixes () {
 	$('div#items-list>div>div.item').click(function() {
 		setTimeout (function() {
   			fixNetworkingPage();
-			$('#items-search').focus();	// Putting this here, because we don't want to manipulate focus everytime this function is called
 		}, 1000);
 	});
 } // End of setupNetworkingPageFixes
@@ -203,15 +204,15 @@ function fixNetworkingPage() {
 	fixGroupListings();
 	fixSocialMediaButtonNetworking();
 	fixGroupFilterSection();
-	
+	$('div#content>div.row>div.item-container').first().attr("id", "item-container");
+	addSkipLinks("#item-container");
 } // End of fixNetworkingPage
 
 function fixAccountPage() {
 	fixAccountHeadings();
 	fixAccountForm();
 	fixAccountLockOptions();
-	fixSliders();
-	$('#accInfoH1').focus();
+	fixSliders();	
 } // End of fixAccountPage
 
 function fixSliders() {
@@ -1049,9 +1050,14 @@ function fixSocialMediaButtonSessionSpeakers () {
 } // End of fixSocialMediaButtonSessionSpeakers
 
 function fixAdda11yNotesSessions () {
-	$('#session-accordion').find('div#description').find('div.desc-notes').append('<div lang="fr"><h2>Notes sur l\'accessibilité :</h2><p><ul><li>Le lecteur vidéo est réglé sur lecture automatique en mode sourdine. Cliquez sur le bouton Activer le son du lecteur vidéo pour le son.</li><li>Si vous avez des difficultés à utiliser le lecteur vidéo avec votre clavier, veuillez suivre les étapes suivantes. Mettez la vidéo en focus et sélectionnez "CTRL + ?" sur votre clavier, ce qui vous montrera les raccourcis clavier qui peuvent être utilisés lorsque la vidéo est en focus. Sélectionnez "CTRL + F" pour masquer à nouveau les raccourcis et les commandes du lecteur vidéo seront désormais visibles. Si vous avez besoin d\'aide, n\'hésitez pas à nous contacter en utilisant l\'icône de clavardage en bas à droite intitulée "Open chat with Ask Alex in the Drift Widget messenger".</li></p></div><div lang="en"><h2>Accessibility notes</h2><p><ul><li>The video player is set to autoplay on mute. Click the unmute button on the video player for sound.</li><li>If you have any difficulties using the video player with your keyboard then please perform the following steps. Focus the video and select “CTRL + ?” on your keyboard, this will show you the keyboard shortcuts that can be used when the video is in focus. Select “CTRL + F” to hide the shortcuts again and the video player controls will now be visible. If you need further help don’t hesitate to contact us using the chat icon at bottom right labelled as “Open chat with Ask Alex in the Drift Widget messenger”.</li></p></div>');
+	$('#session-accordion').find('div#description').find('div.desc-notes').append('<div lang="fr"><h2>Notes sur l\'accessibilité :</h2><p><ul><li>Le lecteur vidéo est réglé sur lecture automatique en mode sourdine. Cliquez sur le bouton Activer le son du lecteur vidéo pour le son.</li><li>Si vous avez des difficultés à utiliser le lecteur vidéo avec votre clavier, veuillez suivre les étapes suivantes. Mettez la vidéo en focus et sélectionnez "CTRL + ?" sur votre clavier, ce qui vous montrera les raccourcis clavier qui peuvent être utilisés lorsque la vidéo est en focus. Sélectionnez "CTRL + F" pour masquer à nouveau les raccourcis et les commandes du lecteur vidéo seront désormais visibles. Si vous avez besoin d\'aide, n\'hésitez pas à nous contacter en utilisant l\'icône de clavardage en bas à droite intitulée "Open chat with Ask Alex in the Drift Widget messenger".</li></p></div><div lang="en"><h2>Accessibility notes</h2><p><ul><li>The video player is set to autoplay on mute. Click the unmute button on the video player for sound.</li><li>If you have any difficulties using the video player with your keyboard then please perform the following steps. Focus the video and select ¿CTRL + ?¿ on your keyboard, this will show you the keyboard shortcuts that can be used when the video is in focus. Select ¿CTRL + F¿ to hide the shortcuts again and the video player controls will now be visible. If you need further help don¿t hesitate to contact us using the chat icon at bottom right labelled as ¿Open chat with Ask Alex in the Drift Widget messenger¿.</li></p></div>');
 } // End of fixAdda11yNotesSessions
 
 function fixAdda11yNotesChannels () {
 	$('#session-accordion').find('div#description').find('div.desc-notes').append('<div lang="fr"><h2>Notes sur l\'accessibilité :</h2><p><ul><li>Le lecteur vidéo est réglé sur lecture automatique en mode sourdine. Cliquez sur le bouton Activer le son du lecteur vidéo pour le son.</li><li>Si vous avez des difficultés à utiliser le lecteur vidéo avec votre clavier, veuillez suivre les étapes suivantes. Mettez la vidéo en focus et sélectionnez "CTRL + ?" sur votre clavier, ce qui vous montrera les raccourcis clavier qui peuvent être utilisés lorsque la vidéo est en focus. Sélectionnez "CTRL + F" pour masquer à nouveau les raccourcis et les commandes du lecteur vidéo seront désormais visibles. Si vous avez besoin d\'aide, n\'hésitez pas à nous contacter en utilisant l\'icône de clavardage en bas à droite intitulée "Open chat with Ask Alex in the Drift Widget messenger".</li><li>Pour ouvrir le sous-titrage dans un nouveau onglet, accédez à <a href="https://www.streamtext.net/player?event=CARTFRCB" target="_blank" rel="noopener noreferrer">https://www.streamtext.net/player?event=CARTFRCB</a>.</li></p></div><div lang="en"><h2>Accessibility notes</h2><p><ul><li>The video player is set to autoplay on mute. Click the unmute button on the video player for sound.</li><li>If you have any difficulties using the video player with your keyboard then please perform the following steps. Focus the video and select “CTRL + ?” on your keyboard, this will show you the keyboard shortcuts that can be used when the video is in focus. Select “CTRL + F” to hide the shortcuts again and the video player controls will now be visible. If you need further help don’t hesitate to contact us using the chat icon at bottom right labelled as “Open chat with Ask Alex in the Drift Widget messenger”.</li><li>To open the subtitles in a new tab, go to <a href="https://www.streamtext.net/player?event=CARTFRCB" target="_blank" rel="noopener noreferrer">https://www.streamtext.net/player?event=CARTFRCB</a>.</li></p></div>');
 } // End of fixAdda11yNotesChannels
+
+function addSkipLinks (dest) {
+	let linkText = (getCookie("language")==="fr" ? "Passer au contenu principal" : "Skip to main content");
+	if (!$('#skipLink').length) $('#page').prepend('<p id="skipLinkP" style="display: block;margin: 0;padding: 0;"><a href="' + dest + '" class="skipLink" id="skipLink">' + linkText + '</a></p>')
+} // End of addSkipLinks
