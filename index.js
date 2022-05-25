@@ -37,15 +37,15 @@ function letErRip () {
 		// If on the lobby page:
 		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=lobby/i)) fixLobbyPage();
 		// If on the channels page:
-		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=channels/i)) {setupChannelsPageFixes (); fixChannelsPage();} // French schedule
+		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=channels/i)) {setupChannelsPageFixes (); /* fixChannelsPage();  // This is called in the setup function */} // French schedule
 		// If on the sessions page:
-		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=sessions/i)) {setupChannelsPageFixes(); fixChannelsPage();} // English schedule
+		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=sessions/i)) {setupChannelsPageFixes(); /* fixChannelsPage();  // This is called in the setup function */} // English schedule
 		// If on the career fair page:
-		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=exhibitors/i)) {setupCareerFairPageFixes(); fixCareerFairPage();}
+		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=exhibitors/i)) {setupCareerFairPageFixes(); /* fixCareerFairPage(); // This is called in the setup function */}
 		// If on the showcase page:
-		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=showcase/i)) {setupShowcasePageFixes(); fixShowcasePage();}
+		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=showcase/i)) {setupShowcasePageFixes(); /* fixShowcasePage(); // This is called in the setup function */}
 		// If on the networking page:
-		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=attendees/i)) {setupNetworkingPageFixes(); fixNetworkingPage();}
+		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=attendees/i)) {setupNetworkingPageFixes(); /* fixNetworkingPage(); // This is called in the setup function */}
 		// If on the account page:
 		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=settings/i)) fixAccountPage();
 	}, 5000);
@@ -74,7 +74,10 @@ function fixLoginPage() {
 function fixLobbyPage() {
 	fixHomeBannerAlt();
 	fixChatWhiteSpaceLobby();
-	fixLobbyHeadings();	
+	fixLobbyHeadings();
+	
+	// Set focus
+	$('h1#annonceH1').focus();
 } // End of fixLobbyPage
 
 function setupChannelsPageFixes () {
@@ -98,17 +101,8 @@ function fixChannelsPage() {
 	fixSessionsAddIcon();
 	fixSessionsAccordion();
 	fixSocialMediaButtonSessionSpeakers();
+	$('#items-search').focus();
 } // End of fixChannelsPage
-
-// This is exactly the same as Channels page....why are there two?
-function fixSessionsPage() {
-	fixChatWhiteSpaceChannelsSessions();
-	fixSessionsFrenchTranslations();
-	fixSpeakerBioWall();
-	fixSessionsAddIcon();
-	fixSessionsAccordion();
-	fixSocialMediaButtonSessionSpeakers();
-} // End of fixSessionsPage
 
 function setupCareerFairPageFixes () {
 	// Whenever someone clicks on a new exhibitor block, we need to apply fixes...but it's more complicated than Avril Lavign's ex-boyfriend's situations.
@@ -139,6 +133,7 @@ function setupCareerFairPageFixes () {
 function fixCareerFairPage() {
 	fixChatWhiteSpaceCareerFairShowcase();
 	fixSocialMediaButtonCareerFairShowcase();
+	$('#items-search').focus();
 } // End of fixCareerFairPage
 
 
@@ -157,6 +152,7 @@ function setupShowcasePageFixes () {
 function fixShowcasePage() {
 	fixChatWhiteSpaceCareerFairShowcase();
 	fixSocialMediaButtonCareerFairShowcase();
+	$('#items-search').focus();
 } // End of fixShowcasePage
 
 function setupNetworkingPageFixes () {
@@ -173,6 +169,7 @@ function setupNetworkingPageFixes () {
 	$('div#items-list>div>div.item').click(function() {
 		setTimeout (function() {
   			fixNetworkingPage();
+			$('#items-search').focus();	// Putting this here, because we don't want to manipulate focus everytime this function is called
 		}, 1000);
 	});
 } // End of setupNetworkingPageFixes
@@ -183,6 +180,7 @@ function fixNetworkingPage() {
 	fixGroupListings();
 	fixSocialMediaButtonNetworking();
 	fixGroupFilterSection();
+	
 } // End of fixNetworkingPage
 
 function fixAccountPage() {
@@ -190,6 +188,7 @@ function fixAccountPage() {
 	fixAccountForm();
 	fixAccountLockOptions();
 	fixSliders();
+	$('#accInfoH1').focus();
 } // End of fixAccountPage
 
 function fixSliders() {
@@ -490,9 +489,9 @@ function fixAccountHeadings () {
 	// Roch Lambert - Now add hidden <h1> for semantic purposes
 	if (!$('h1#accInfoH1').length) {
 		if(getCookie("language")==="fr"){
-			$('#page').prepend('<h1 class="wb-inv" id="accInfoH1">Informations sur le compte</h1>');
+			$('#page').prepend('<h1 class="wb-inv" id="accInfoH1" tabindex="-1">Informations sur le compte</h1>');
 		} else {
-			$('#page').prepend('<h1 class="wb-inv" id="accInfoH1">Account information</h1>');
+			$('#page').prepend('<h1 class="wb-inv" id="accInfoH1" tabindex="-1">Account information</h1>');
 		}
 	}
 } // End of fixAccountHeadings
@@ -854,9 +853,9 @@ function fixLobbyHeadings() {
 	// Now add a hidden <h1> for semantic purposes
 	if (!$('h1#annonceH1').length) {
 		if(getCookie("language")==="fr"){
-			$('#announcements').prepend('<h1 class="wb-inv" id="annonceH1">Annonces</h1>');
+			$('#announcements').prepend('<h1 class="wb-inv" id="annonceH1" tabindex="-1">Annonces</h1>');
 		} else {
-			$('#announcements').prepend('<h1 class="wb-inv" id="annonceH1">Announcements</h1>');
+			$('#announcements').prepend('<h1 class="wb-inv" id="annonceH1" tabindex="-1">Announcements</h1>');
 		};
 	}
 } // End of fixLobbyHeadings
