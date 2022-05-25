@@ -952,7 +952,7 @@ function fixSessionsAddIcon () {
 		$(this).find("div.sub-title").attr("id", sid2 + '-subtitle');
 		// Now fix those blasted <h6>s
 		$(this).find('h6').replaceWith(function() {
-			//return '<button class="h6 mt-2 mb-0 border-0 text-left bg-white" aria-describedby="' + sid2 + '-title ' + sid2 + '-subtitle"><span class="wb-inv">' + ((getCookie("language")==="fr") ? "Ouvrir " : "Open ") + '</span>' + $(this).html() + '</button>';
+			return '<button class="h6 mt-2 mb-0 border-0 text-left bg-white" aria-describedby="' + sid2 + '-title ' + sid2 + '-subtitle"><span class="d-none">' + ((getCookie("language")==="fr") ? "Ouvrir " : "Open ") + '</span>' + $(this).html() + '</button>';
 		}).click(function() {
 			virtual_portal_render_section('session', sid2);
 		});
