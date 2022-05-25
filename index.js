@@ -37,15 +37,15 @@ function letErRip () {
 		// If on the lobby page:
 		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=lobby/i)) fixLobbyPage();
 		// If on the channels page:
-		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=channels/i)) {setupChannelsPageFixes (); /* fixChannelsPage();  // This is called in the setup function */} // French schedule
+		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=channels/i)) {setupChannelsPageFixes (); fixChannelsPage(); } // French schedule
 		// If on the sessions page:
-		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=sessions/i)) {setupChannelsPageFixes(); /* fixChannelsPage();  // This is called in the setup function */} // English schedule
+		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=sessions/i)) {setupChannelsPageFixes(); fixChannelsPage(); } // English schedule
 		// If on the career fair page:
-		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=exhibitors/i)) {setupCareerFairPageFixes(); /* fixCareerFairPage(); // This is called in the setup function */}
+		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=exhibitors/i)) {setupCareerFairPageFixes(); fixCareerFairPage(); }
 		// If on the showcase page:
-		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=showcase/i)) {setupShowcasePageFixes(); /* fixShowcasePage(); // This is called in the setup function */}
+		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=showcase/i)) {setupShowcasePageFixes(); fixShowcasePage(); }
 		// If on the networking page:
-		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=attendees/i)) {setupNetworkingPageFixes(); /* fixNetworkingPage(); // This is called in the setup function */}
+		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=attendees/i)) {setupNetworkingPageFixes(); fixNetworkingPage(); }
 		// If on the account page:
 		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=settings/i)) fixAccountPage();
 	}, 5000);
@@ -103,6 +103,16 @@ function fixChannelsPage() {
 	fixSocialMediaButtonSessionSpeakers();
 	$('#items-search').focus();
 } // End of fixChannelsPage
+
+// Andrew Nordlund - I'm not entirely sure what this does that's different than fixChannelsPage above.  They both call the same functions
+function fixSessionsPage() {
+	fixChatWhiteSpaceChannelsSessions();
+	fixSessionsFrenchTranslations();
+	fixSpeakerBioWall();
+	fixSessionsAddIcon();
+	fixSessionsAccordion();
+	fixSocialMediaButtonSessionSpeakers();
+} // End of fixSessionsPage
 
 function setupCareerFairPageFixes () {
 	// Whenever someone clicks on a new exhibitor block, we need to apply fixes...but it's more complicated than Avril Lavign's ex-boyfriend's situations.
