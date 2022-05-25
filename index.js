@@ -961,9 +961,9 @@ function fixSessionsAddIcon () {
 function fixLeftNavIconFrench () {
 	// Find French program / English program links in sidebar and change class to audio icon depending on language
 	if(getCookie("language")==="fr") {
-		$('#sidebar').find('ul.virtual-nav-list').find('li:nth-child(2)').find('i.fa-video').attr('class', 'fas fa-file-audio icon');
+		$('#sidebar').find('ul.virtual-nav-list').find('li:nth-child(3)').find('i').attr('class', 'fas fa-headphones icon');
 	} else {
-		$('#sidebar').find('ul.virtual-nav-list').find('li:nth-child(1)').find('i.fa-calendar-check').attr('class', 'fas fa-file-audio icon');
+		$('#sidebar').find('ul.virtual-nav-list').find('li:nth-child(2)').find('i').attr('class', 'fas fa-headphones icon');
 	};
 } // End of fixLeftNavIconFrench
 
