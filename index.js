@@ -37,15 +37,15 @@ function letErRip () {
 		// If on the lobby page:
 		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=lobby/i)) { fixLobbyPage(); $('h1#annonceH1').focus(); }
 		// If on the channels page:
-		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=channels/i)) {setupChannelsPageFixes(); fixChannelsPage(); $('#page').focus();} // French schedule
+		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=channels/i)) {setupChannelsPageFixes(); fixChannelsPage(); $('#page').attr("tabindex","-1").focus();} // French schedule
 		// If on the sessions page:
-		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=sessions/i)) {setupSessionsPageFixes(); fixSessionsPage(); $('#page').focus();} // English schedule
+		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=sessions/i)) {setupSessionsPageFixes(); fixSessionsPage(); $('#page').attr("tabindex","-1").focus();} // English schedule
 		// If on the career fair page:
-		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=exhibitors/i)) {setupCareerFairPageFixes(); fixCareerFairPage(); $('#page').focus(); }
+		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=exhibitors/i)) {setupCareerFairPageFixes(); fixCareerFairPage(); $('#page').attr("tabindex","-1").focus(); }
 		// If on the showcase page:
-		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=showcase/i)) {setupShowcasePageFixes(); fixShowcasePage();  $('#page').focus(); }
+		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=showcase/i)) {setupShowcasePageFixes(); fixShowcasePage();  $('#page').attr("tabindex","-1").focus(); }
 		// If on the networking page:
-		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=attendees/i)) {setupNetworkingPageFixes(); fixNetworkingPage(); $('#page').focus(); }
+		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=attendees/i)) {setupNetworkingPageFixes(); fixNetworkingPage(); $('#page').attr("tabindex","-1").focus(); }
 		// If on the account page:
 		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=settings/i)) { fixAccountPage(); $('#accInfoH1').focus(); }
 	}, 5000);
@@ -950,9 +950,11 @@ function fixSessionsAddIcon () {
 			virtual_session_attendance_toggle(sid2);
 		});
 		$(this).find("div.sub-title").attr("id", sid2 + '-subtitle');
+		// We're about to introduce a scrolling issue.  Fix it here first:
+		$('div.items-container').attr("style","overflow-y:hidden;");
 		// Now fix those blasted <h6>s
 		$(this).find('h6').replaceWith(function() {
-			return '<button class="h6 mt-2 mb-0 border-0 text-left bg-white" aria-describedby="' + sid2 + '-title ' + sid2 + '-subtitle"><span class="d-none">' + ((getCookie("language")==="fr") ? "Ouvrir " : "Open ") + '</span>' + $(this).html() + '</button>';
+			return '<button class="h6 mt-2 mb-0 border-0 text-left bg-white" aria-describedby="' + sid2 + '-title ' + sid2 + '-subtitle"><span class="wb-inv">' + ((getCookie("language")==="fr") ? "Ouvrir " : "Open ") + '</span>' + $(this).html() + '</button>';
 		}).click(function() {
 			virtual_portal_render_section('session', sid2);
 		});
@@ -1060,5 +1062,9 @@ function fixAdda11yNotesChannels () {
 
 function addSkipLinks (dest) {
 	let linkText = (getCookie("language")==="fr" ? "Passer au contenu principal" : "Skip to main content");
-	if (!$('#skipLink').length) $('#page').prepend('<p id="skipLinkP" style="display: block;margin: 0;padding: 0;"><a href="' + dest + '" class="skipLink" id="skipLink">' + linkText + '</a></p>')
+	if (!$(dest)[0].hasAttribute("tabindex")) $(dest).attr("tabindex", "-1");
+	if (!$('#skipLink').length) {
+		$('#page').prepend('<p id="skipLinkP" style="display: block;margin: 0;padding: 0;"><a href="#" class="skipLink" id="skipLink">' + linkText + '</a></p>');
+		$('a#skipLink').click(function() { $(dest).focus()});
+	}
 } // End of addSkipLinks
