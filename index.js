@@ -64,7 +64,7 @@ function fixAllPages () {
 	fixGlobalNavHeadings();
 	fixLeftNavIconFrench();
 	fixLeftNavFrenchSize();
-	fixRemoveHelpLeftNav();
+	fixHelpDriftChat();
 } // End of fixAllPages
 
 function fixLoginPage() {
@@ -424,10 +424,11 @@ function fixLangModal() {
 	$('#languages-modal>div>div.modal-content>div.modal-header>button.close').attr("aria-label", "Close");
 } // End of fixLangModal
 
-function fixRemoveHelpLeftNav() {
+function fixHelpDriftChat() {
 	// Temp change to remove the left navigation button for help
-	$('#sidebar').find('button#virtual-action-help').parent().remove();
-} // End of fixRemoveHelpLeftNav
+	$('#sidebar').find('button#virtual-action-help').addClass(".drift-open-chat");
+	$('#sidebar').find('button#virtual-action-help').prop("onclick", null);
+} // End of fixHelpDriftChat
 
 function fixNotifications() {
 	// Andrew Nordlund - Give the Notifications button an accessible name.  Start with the word "Notifications"
