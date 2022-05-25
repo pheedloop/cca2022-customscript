@@ -513,10 +513,14 @@ function fixAccountForm () {
 	
 	// Andrew Nordlund - fix toggle switches to give them a label
 	$("input[type=checkbox]").each(function(i) {
+		let checkID = $(this).attr("id");
 		let pn = $(this).parent();
 		let lbl = pn.next();
 		pn.replaceWith('<span class="switch">' + pn.html() + '</span>');
 		lbl.replaceWith('<label class="pl-3 pb-1" for="' + $(this).attr("id") +'">' + lbl.html() + '</label>');
+		lbl.click(function() {
+			$('#' + checkID).click();
+		});
 	});
 	
 	// Andrew Nordlund - Fix file inputs...except <input type=file aria-describedby> doesn't enjoy wide support.
