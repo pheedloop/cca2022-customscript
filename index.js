@@ -37,15 +37,15 @@ function letErRip () {
 		// If on the lobby page:
 		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=lobby/i)) fixLobbyPage();
 		// If on the channels page:
-		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=channels/i)) {setupChannelsPageFixes (); /* fixChannelsPage();  // This is called in the setup function */} // French schedule
+		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=channels/i)) {setupChannelsPageFixes(); fixChannelsPage(); /* // This is called in the setup function */} // French schedule
 		// If on the sessions page:
-		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=sessions/i)) {setupChannelsPageFixes(); /* fixChannelsPage();  // This is called in the setup function */} // English schedule
+		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=sessions/i)) {setupSessionsPageFixes(); fixSessionsPage(); /* // This is called in the setup function */} // English schedule
 		// If on the career fair page:
-		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=exhibitors/i)) {setupCareerFairPageFixes(); /* fixCareerFairPage(); // This is called in the setup function */}
+		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=exhibitors/i)) {setupCareerFairPageFixes(); fixCareerFairPage(); /* // This is called in the setup function */}
 		// If on the showcase page:
-		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=showcase/i)) {setupShowcasePageFixes(); /* fixShowcasePage(); // This is called in the setup function */}
+		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=showcase/i)) {setupShowcasePageFixes(); fixShowcasePage(); /* // This is called in the setup function */}
 		// If on the networking page:
-		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=attendees/i)) {setupNetworkingPageFixes(); /* fixNetworkingPage(); // This is called in the setup function */}
+		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=attendees/i)) {setupNetworkingPageFixes(); fixNetworkingPage(); /* // This is called in the setup function */}
 		// If on the account page:
 		if (window.location.href.match(/\/CCA2022\/virtual\/\?page=settings/i)) fixAccountPage();
 	}, 5000);
@@ -75,8 +75,6 @@ function fixLobbyPage() {
 	fixHomeBannerAlt();
 	fixChatWhiteSpaceLobby();
 	fixLobbyHeadings();
-	
-	// Set focus
 	$('h1#annonceH1').focus();
 } // End of fixLobbyPage
 
@@ -91,6 +89,17 @@ function setupChannelsPageFixes () {
 	});
 } // End of setupChannelsPageFixes
 
+function setupSessionsPageFixes () {
+	// whenever someone clicks on a session, then the fixes to this page have to be applied.  But they can't be applied
+	// right away because not everything is loaded.  So, after they click, wait a second (maybe too much?) and then
+	// run through all the fixes.
+	$('div.session-selector').click(function() {
+		setTimeout (function() {
+  			fixSessionsPage();
+		}, 1000);
+	});
+} // End of setupChannelsPageFixes
+
 function fixChannelsPage() {
 	// Andrew Nordlund - Okay, you need to do this on page load (after clicking a left nav button) _and_ after clicking on an event or speaker's info
 	// in the page.
@@ -101,8 +110,21 @@ function fixChannelsPage() {
 	fixSessionsAddIcon();
 	fixSessionsAccordion();
 	fixSocialMediaButtonSessionSpeakers();
-	$('#items-search').focus();
+	fixAdda11yNotesChannels();	
 } // End of fixChannelsPage
+
+function fixSessionsPage() {
+	// Andrew Nordlund - Okay, you need to do this on page load (after clicking a left nav button) _and_ after clicking on an event or speaker's info
+	// in the page.
+	fixChatWhiteSpaceChannelsSessions();
+	fixSessionsFrenchTranslations();
+	fixSpeakerBioWall();
+	addAddToSchedText();
+	fixSessionsAddIcon();
+	fixSessionsAccordion();
+	fixSocialMediaButtonSessionSpeakers();
+	fixAdda11yNotesSessions();	
+} // End of fixSessionsPage
 
 function setupCareerFairPageFixes () {
 	// Whenever someone clicks on a new exhibitor block, we need to apply fixes...but it's more complicated than Avril Lavign's ex-boyfriend's situations.
@@ -1015,3 +1037,11 @@ function fixSocialMediaButtonSessionSpeakers () {
 		$(this).attr("rel", "noopener noreferrer");
 	});
 } // End of fixSocialMediaButtonSessionSpeakers
+
+function fixAdda11yNotesSessions () {
+
+} // End of fixAdda11yNotesSessions
+
+function fixAdda11yNotesChannels () {
+
+} // End of fixAdda11yNotesChannels
