@@ -94,6 +94,7 @@ function fixChannelsPage() {
 	fixChatWhiteSpaceChannelsSessions();
 	fixSessionsFrenchTranslations();
 	fixSpeakerBioWall();
+	addAddToSchedText();
 	fixSessionsAddIcon();
 	fixSessionsAccordion();
 	fixSocialMediaButtonSessionSpeakers();
@@ -890,14 +891,39 @@ function fixNetworkingNewContent () {
 	$('#attendee-container').attr("aria-live","polite");
 } // End of fixNetworkingNewContent
 
+function addAddToSchedText () {
+	$('div#page').append('<span id="addToSchedText" class="d-none">' + ((getCookie("language")==="fr") ? "Ajouter à l'horaire personnel" : "Add to Personal Schedule") + '</span>');
+
+	// IMPORTANT ROCH OR MAXIM!!!  THIS NEEDS PROPER TRANSLATION!
+	$('div#page').append('<span id="removeFromSchedText" class="d-none">' + ((getCookie("language")==="fr") ? "Retirer de l'horaire personnel" : "Remove from Personal Schedule") + '</span>');
+} // End of addAddToSchedText
+
 function fixSessionsAddIcon () {
+	$('#content>div>div[aria-live=polite]').removeAttr("aria-live");
+
+	$('div#items-list').attr("tabindex", "-1");
+
 	// Loop through all the sessions
 	$('.sessions-container').find('div.session-selector').each(function () {
+		$(this).parent().off("keypress").attr("tabindex", "-1");
 		// Get value of the ID of the session
 		var sid = $(this).find("div.title>i").attr("id");
 		var sid2 = sid.replace('schedule-add-icon-','');
-		$(this).find('div.title>span').attr("id", sid2 + '-title');
-		$(this).find("div.title>i").attr("aria-labelledby", sid2 + '-title');
+		$(this).find('div.title>span').attr("id", sid2 + '-title').click(function() {
+			virtual_portal_render_section('session', sid2);
+		});
+		$(this).find("div.title>i.fa-plus-square").attr("aria-labelledby", "addToSchedText " + sid2 + '-title');
+		$(this).find("div.title>i.fa-check-square").attr("aria-labelledby", "removeFromSchedText " + sid2 + '-title');
+		$(this).find("div.title>i").click(function() {
+			virtual_session_attendance_toggle(sid2);
+		});
+		$(this).find("div.sub-title").attr("id", sid2 + '-subtitle');
+		// Now fix those blasted <h6>s
+		$(this).find('h6').replaceWith(function() {
+			return '<button class="h6 mt-2 mb-0 border-0 text-left bg-white" aria-describedby="' + sid2 + '-title ' + sid2 + '-subtitle"><span class="wb-inv">' + ((getCookie("language")==="fr") ? "Ouvrir " : "Open ") + '</span>' + $(this).html() + '</button>';
+		}).click(function() {
+			virtual_portal_render_section('session', sid2);
+		});
 	});
 } // End of fixSessionsAddIcon
 
