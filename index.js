@@ -110,7 +110,7 @@ function fixSessionsPage() {
 	fixSocialMediaButtonSessionSpeakers();
 } // End of fixSessionsPage
 
-function setupCareerFairFixes () {
+function setupCareerFairPageFixes () {
 	// Whenever someone clicks on a new exhibitor block, we need to apply fixes...but it's more complicated than Avril Lavign's ex-boyfriend's situations.
 	// If they're just looking at the exhibitor's profile, then go ahead and show them the destination exhibitor's profile.  BUT if they're
 	// in a live session, they'll get a "Are you sure you wanna leave this live sesh?"  If they click "No", then forgedaboudit.  If they
