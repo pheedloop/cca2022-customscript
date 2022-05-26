@@ -207,7 +207,7 @@ function fixNetworkingPage() {
 	fixPeopleListings();
 	fixGroupListings();
 	fixSocialMediaButtonNetworking();
-	fixGroupFilterSection();
+	//fixGroupFilterSection();
 	$('div#content>div.row>div.item-container').first().attr("id", "item-container");
 	addSkipLinks("#item-container");
 } // End of fixNetworkingPage
