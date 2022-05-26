@@ -295,6 +295,7 @@ function fixExhibitors () {
 
 // fixAttendees is to fix the list of attendees that shows up whenever "Online now" is selected in the filter on the Networking page
 function fixAttendees() {
+	$('div#content>div>div[aria-live=polite]').removeAttr("aria-live");
 	$('div#items-list>div[aria-live=polite]').removeAttr("aria-live");
 	$('div.attendees-list-online>div.item').each(function() {
 		$(this).addClass("border-0 text-left");
