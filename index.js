@@ -64,7 +64,7 @@ function fixAllPages () {
 	fixGlobalNavHeadings();
 	fixLeftNavIconFrench();
 	fixLeftNavFrenchSize();
-	fixHelpDriftChat();
+	//fixHelpDriftChat();
 } // End of fixAllPages
 
 function fixLoginPage() {
@@ -426,11 +426,13 @@ function fixLangModal() {
 
 function fixHelpDriftChat() {
 	// Fix the Help icon and point it to the Drift chat
-	if(getCookie("language")==="fr"){
+	/* if(getCookie("language")==="fr"){
 		$('#sidebar').find('button#virtual-action-help').replaceWith('<a class="virtual-action d-block drift-open-chat" href="#"><span class="icon-container"><i class="fas fa-info-circle icon"></i></span><span class="ml-2">Aide</span></a>');
 	} else {
 		$('#sidebar').find('button#virtual-action-help').replaceWith('<a class="virtual-action d-block drift-open-chat" href="#"><span class="icon-container"><i class="fas fa-info-circle icon"></i></span><span class="ml-2">Help</span></a>');
-	};	
+	}; */	
+	// Was causing issues so just remove it
+	$('#sidebar').find('button#virtual-action-help').parent().remove();
 } // End of fixHelpDriftChat
 
 function fixNotifications() {
