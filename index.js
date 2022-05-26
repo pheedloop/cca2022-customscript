@@ -178,6 +178,7 @@ function fixShowcasePage() {
 	fixChatWhiteSpaceCareerFairShowcase();
 	fixSocialMediaButtonCareerFairShowcase();
 	$('div#content>div.row>div.item-container').first().attr("id", "item-container");
+	$('div#content>div>div.items-container[aria-live=polite]').removeAttr("aria-live");
 	addSkipLinks("#item-container");
 } // End of fixShowcasePage
 
