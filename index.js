@@ -156,6 +156,7 @@ function setupCareerFairPageFixes () {
 function fixCareerFairPage() {
 	fixChatWhiteSpaceCareerFairShowcase();
 	fixSocialMediaButtonCareerFairShowcase();
+	fixSocialMediaButtonsPeopleCareerFairShowcase();
 	$('div#content>div.row>div.item-container').first().attr("id", "item-container");
 	$('div#content>div>div.items-container[aria-live=polite]').removeAttr("aria-live");
 	addSkipLinks("#item-container");
@@ -177,6 +178,7 @@ function setupShowcasePageFixes () {
 function fixShowcasePage() {
 	fixChatWhiteSpaceCareerFairShowcase();
 	fixSocialMediaButtonCareerFairShowcase();
+	fixSocialMediaButtonsPeopleCareerFairShowcase();
 	$('div#content>div.row>div.item-container').first().attr("id", "item-container");
 	$('div#content>div>div.items-container[aria-live=polite]').removeAttr("aria-live");
 	addSkipLinks("#item-container");
@@ -1077,3 +1079,29 @@ function addSkipLinks (dest) {
 		$('a#skipLink').click(function() { $(dest).focus()});
 	}
 } // End of addSkipLinks
+
+function fixSocialMediaButtonsPeopleCareerFairShowcase () {
+	// Roch Lambert - Fix the speaker social media icons in the career fair
+	// LinkedIn
+	$('#exhibitor-container').find('ul.list-unstyled.mb-5').find('li.media.p-3').find('div.media-body').find('div.d-block>a>i.fa-linkedin').each(function () {
+		$(this).replaceWith("<i class='fab fa-linkedin fa-lg'><span class='wb-inv'>LinkedIn</span></i>");
+	});
+	// Twitter
+	$('#exhibitor-container').find('ul.list-unstyled.mb-5').find('li.media.p-3').find('div.media-body').find('div.d-block>a>i.fa-twitter-square').each(function () {
+		$(this).replaceWith("<i class='fab fa-twitter-square fa-lg'><span class='wb-inv'>Twitter</span></i>");
+	});
+	// External website
+	if(getCookie("language")==="fr"){
+		$('#exhibitor-container').find('ul.list-unstyled.mb-5').find('li.media.p-3').find('div.media-body').find('div.d-block>a>i.fa-external-link-square-alt').each(function () {
+			$(this).replaceWith("<i class='fas fa-external-link-square-alt fa-lg'><span class='wb-inv'>Site web externe</span></i>");
+		});
+	} else {
+		$('#exhibitor-container').find('ul.list-unstyled.mb-5').find('li.media.p-3').find('div.media-body').find('div.d-block>a>i.fa-external-link-square-alt').each(function () {
+			$(this).replaceWith("<i class='fas fa-external-link-square-alt fa-lg'><span class='wb-inv'>External website</span></i>");
+		});
+	};
+	// Add external rel attribute on the links
+	$('#exhibitor-container').find('ul.list-unstyled.mb-5').find('li.media.p-3').find('div.media-body').find('div.d-block>a').each(function () {
+		$(this).attr("rel", "noopener noreferrer");
+	});
+} // End of fixSocialMediaButtonsPeopleCareerFairShowcase
