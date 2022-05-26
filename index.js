@@ -205,6 +205,7 @@ function setupNetworkingPageFixes () {
 function fixNetworkingPage() {
 	fixChatWhiteSpaceNetworking();
 	fixPeopleListings();
+	fixNetworkingNewContent();
 	fixGroupListings();
 	fixSocialMediaButtonNetworking();
 	//fixGroupFilterSection();
