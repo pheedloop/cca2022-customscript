@@ -157,6 +157,7 @@ function fixCareerFairPage() {
 	fixChatWhiteSpaceCareerFairShowcase();
 	fixSocialMediaButtonCareerFairShowcase();
 	$('div#content>div.row>div.item-container').first().attr("id", "item-container");
+	$('div#content>div>div.items-container[aria-live=polite]').removeAttr("aria-live");
 	addSkipLinks("#item-container");
 } // End of fixCareerFairPage
 
@@ -271,7 +272,8 @@ function fixGroupFilterSection () {
 
 // fixExhibitors is to fix the list of people (except Online Now) from the filter drop-down on the Networking page
 function fixExhibitors () {
-	$('div#items-list>div[aria-liave=polite]').removeAttr("aria-live");	// This should prolly go elsewhere too
+	$('div#content>div>div.items-container[aria-live=polite]').removeAttr("aria-live");	// This should prolly go elsewhere too
+	$('div#items-list>div[aria-live=polite]').removeAttr("aria-live");	// This should prolly go elsewhere too
 	$('div#items-list>div>div.item').each(function() {
 		$(this).addClass("border-0 text-left");
 		divToButton(this);
@@ -292,7 +294,7 @@ function fixExhibitors () {
 
 // fixAttendees is to fix the list of attendees that shows up whenever "Online now" is selected in the filter on the Networking page
 function fixAttendees() {
-	$('div#items-list>div[aria-liave=polite]').removeAttr("aria-live");
+	$('div#items-list>div[aria-live=polite]').removeAttr("aria-live");
 	$('div.attendees-list-online>div.item').each(function() {
 		$(this).addClass("border-0 text-left");
 		divToButton(this);
