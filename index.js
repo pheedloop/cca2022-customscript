@@ -64,7 +64,7 @@ function fixAllPages () {
 	fixGlobalNavHeadings();
 	fixLeftNavIconFrench();
 	fixLeftNavFrenchSize();
-	//fixHelpDriftChat();
+	fixHelpDriftChat();
 } // End of fixAllPages
 
 function fixLoginPage() {
