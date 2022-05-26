@@ -342,7 +342,7 @@ function fixGroupListings() {
 	});
 	
 	// Roch Lambert - Need delay to fix translation in french when clicking on the groups button
-	if(getCookie("language")==="fr") {
+	/* if(getCookie("language")==="fr") {
 		$('div.attendees-container>ul>li.nav-item>a#nav-tab-network-groups').click(function () {
 			setTimeout (function () {
 				// Roch Lambert - Set the correct language
@@ -355,7 +355,7 @@ function fixGroupListings() {
 				});
 			}, 2000);
 		});
-	};
+	}; */
 } // End of fixGroupListings
 
 function fixPeopleListings() {
@@ -932,7 +932,6 @@ function setCurrentPage () {
 
 function fixNetworkingNewContent () {
 	$('.attendees-container').removeAttr("aria-live");
-	$('#attendee-container').attr("aria-live","polite");
 } // End of fixNetworkingNewContent
 
 function addAddToSchedText () {
