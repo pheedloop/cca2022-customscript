@@ -1,4 +1,8 @@
-﻿$(document).ready(function() {
+/* Copyright 2022 Employment and Social Development Canada, Government of Canada - All Rights Reserved
+ * Unauthorized use or copying of this file, via any medium without permission of the copyright holder is strictly prohibited.
+*/
+
+$(document).ready(function() {
 	// Andrew Nordlund - Since we're going to have to do all the things when the page loads,
 	// aaaaaaaannnnnnnndddddd whenever someone uses the left menu to go elsewhere,
 	// Imma move everything to another function, and call that from here, and I'll find a way to 
@@ -208,7 +212,8 @@ function fixNetworkingPage() {
 	fixNetworkingNewContent();
 	fixGroupListings();
 	fixSocialMediaButtonNetworking();
-	//fixGroupFilterSection();
+	//observeAttendees();		// This listens for random updates on attendees list, and applies fixes.
+	//fixGroupFilterSection();	// This listens for clicks on the filters list, and applies fixes.
 	$('div#content>div.row>div.item-container').first().attr("id", "item-container");
 	addSkipLinks("#item-container");
 } // End of fixNetworkingPage
@@ -229,14 +234,14 @@ function fixSliders() {
 	});
 } // End of fixSliders
 
-function fixGroupFilterSection () {
+function observeAttendees () {
 	let observer = new MutationObserver(mutationRecords => {
 		//console.log ("There's a mutation!");
 		for (let mutation of mutationRecords) {
 			//console.log ("Mutation type: " + mutation.type);
 			if (mutation.type === 'childList') {
-				fixAttendees();
-				fixExhibitors ()
+				fixAttendees();		// Removes aria-live and changes divs to buttons on Online Now
+				fixExhibitors ()	// Removes aria-live and changes divs to buttons on the full list of people
 			}
 		}
 	});
@@ -247,7 +252,8 @@ function fixGroupFilterSection () {
 	// Watch for changes in the list of exhibitors, speakers, etc.
 	let nd2 = $('div#items-list>div')[0];
 	observer.observe(nd2, {childList : true, subtree : true});
-
+} // End of observeAttendees
+function fixGroupFilterSection () {
 	// Now watch the Filters list for a click.
 	// But before you can do that, you need to watch the filters button for a click
 	// Add class an-mod so you don't repeatedly add hundreds of click listeners
@@ -262,11 +268,8 @@ function fixGroupFilterSection () {
     				$('#items-filter ul.dropdown-menu>li>a').click(function() {
 				      	setTimeout (function() {
       						//console.log ("Fixing group listings....");
-						fixChatWhiteSpaceNetworking();
 			        		fixAttendees();
 	        				fixExhibitors ();
-						fixSocialMediaButtonNetworking();
-						fixGroupFilterSection();
 				    	  }, 500);
 			  	  });
 			}, 500);
@@ -286,7 +289,6 @@ function fixExhibitors () {
 				// Networking section - Groups - expanding the content area to full width
 				$("div#group-container").attr("class", "col-xl-12 scroll-fader");
 			  	$("div#attendee-container").attr("class", "col-xl-12 scroll-fader");	// Experimental....will it work?
-				fixChatWhiteSpaceNetworking();
 				fixNetworkingHeadings();
 				fixNetworkDeviceTranslations();
 		        	fixSocialMediaButtonNetworking();
@@ -310,7 +312,6 @@ function fixAttendees() {
 				$("div#group-container").attr("class", "col-xl-12 scroll-fader");
 				$("div#attendee-container").attr("class", "col-xl-12 scroll-fader");	// Experimental....will it work?
         
-				fixChatWhiteSpaceNetworking();
 				fixNetworkingHeadings();
 				fixNetworkDeviceTranslations();
 		        	fixSocialMediaButtonNetworking();
